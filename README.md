@@ -8,10 +8,6 @@ assign lan interfaces, create vlans, vlan-interfaces and setup dhcp in a single 
 pip install opnsense-helper
 ```
 
-## usage
-- before you create Vlan-Interfaces you need to add them first using the add_vlan method
-- you can also add them via config file but this requires a reboot and it's not yet implemented
-  
 
 ## usage
 - before you create Vlan-Interfaces you need to add them first using the add_vlan method
