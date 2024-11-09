@@ -26,8 +26,23 @@ output="/home/ji/.ansible/collections/ansible_collections/ji_podhead/podnet/plug
 conf_path="/conf/config.xml"
 
 # the variables of the things we will modif
-vlan3 ={'parentinterface': 'vtnet1', 'tag': '3', 'pcp': '0', 'proto': None, 'descr': 'vlan3', 'vlanif': 'vlan0.3',"attr":{"uuid":"cb503df8-821d-4acd-86ba-66b35e4df17n"}}
-vlan4 ={'clone, or fork `git@github.com:the-pod-shop/opnsense-helper.git`
+# opnsense-helper
+assign lan interfaces, create vlans, vlan-interfaces and setup dhcp in a single script.
+
+
+## install 
+## pip
+```bash
+pip install opnsense-helper
+```
+
+## usage
+- before you create Vlan-Interfaces you need to add them first using the add_vlan method
+- you can also add them via config file but this requires a reboot and it's not yet implemented
+  
+
+### contribute
+- clone, or fork `git@github.com:the-pod-shop/opnsense-helper.git`
 - build when made changes
 - make sure to use the right user
 ```bash
@@ -44,6 +59,10 @@ python setup.py bdist_wheel \
 - i decided to create one mself
 - opnsense api does not let me do it, it just replies with: controller not found
 - but /conf/config.xml has the answer.
+- however for phisical interfaces its the god damn conf.rc
+- my opnsense runs in a vm, so it really doesnt matter for me
+- i just add the interfaces via libvirt and all i need to do is to enable them, given the /conf/config.xml method
+xml has the answer.
 - however for phisical interfaces its the god damn conf.rc
 - my opnsense runs in a vm, so it really doesnt matter for me
 - i just add the interfaces via libvirt and all i need to do is to enable them, given the /conf/config.xml method
