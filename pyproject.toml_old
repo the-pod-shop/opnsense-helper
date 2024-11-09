@@ -1,6 +1,6 @@
 [project]
-name = "opnsense-helper"
-version = "0.0.1"
+name = "opnsense_helper"
+version = "0.1.1"
 authors = [
   { name="ji.podhdead", email="ji-podhead@podshop.com" },
 ]
