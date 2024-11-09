@@ -12,29 +12,6 @@ pip install opnsense-helper
 - before you create Vlan-Interfaces you need to add them first using the add_vlan method
 - you can also add them via config file but this requires a reboot and it's not yet implemented
   
-### python 
-
-- import and create object
-```python
-from  opnsense_helper.opnsense_helper import OpennsenseHelper
-helper=OpennsenseHelper(filepath,True,"root","opnsense","192.168.1.103")
-```
-- add some vars we need later
-```python
-filepath = '/home/ji/confignew.xml'
-output="/home/ji/.ansible/collections/ansible_collections/ji_podhead/podnet/plugins/x.xml"
-conf_path="/conf/config.xml"
-
-# the variables of the things we will modif
-# opnsense-helper
-assign lan interfaces, create vlans, vlan-interfaces and setup dhcp in a single script.
-
-
-## install 
-## pip
-```bash
-pip install opnsense-helper
-```
 
 ## usage
 - before you create Vlan-Interfaces you need to add them first using the add_vlan method
