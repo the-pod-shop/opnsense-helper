@@ -9,7 +9,9 @@ pip install opnsense-helper
 ```
 
 ## usage
-
+- before you create Vlan-Interfaces you need to add them first using the add_vlan method
+- you can also add them via config file but this requires a reboot and it's not yet implemented
+  
 ### python 
 
 - import and create object
@@ -33,48 +35,7 @@ opt4_interface= {'descr': 'vlan4', 'enable': '1', 'ipaddr': '200.0.3.1', 'subnet
 
 ```
 - get the current conf file
-- initilaize the values and scan for object
-- dumb the object to xml
-. put the file back to the ssh-host
-- close ssh-connection
-```python
-helper.get_file(conf_path, output)
-helper.initialize()
-helper.objects["dhcpd"]["opt3"]=opt3_dhcp
-helper.objects["dhcpd"]["opt4"]=opt4_dhcp
-helper.objects["vlans"]["vlan3"]=vlan3
-helper.objects["vlans"]["vlan4"]=vlan4
-helper.objects["interfaces"]["opt3"]=opt3_interface
-helper.objects["interfaces"]["opt4"]=opt4_interface
-helper.save(output)
-helper.put_file(output,conf_path)
-helper.close_con()
-```
-
-### adding vlans
-
-| tpe             |       name        |
-| --- | --- | 
-| NIC             |       veth1       |         
-| Interface       |       router      |
-| Vlan            |       vlan0.1     |
-| VlanInterface   |        vlan1      |
-
-
-- no redundant assigntments allowed 
-- reset to default config before reassigning
-- roll back to snapshot
-- old vlans and interfaces must explicitl get deleted and the config cant provide this
-- however config gives freedom over runtime changes without entire cloudinit
-- keep in mind that violating given rules can cause a broken vm 
-
-### copy the config file to your machine manually
-```bash
-scp root@192.168.1.103:/conf/config.xml /home/user/confignew.xml && chmod +x /home/user/confignew.xml &&  chown user:user /home/user/confignew.xml
-```
-### replace the original file manually
-```bash
-scp /home/user/config.xml root@192.168.1.103:/conf/config.xml
+- initilaize th3:/conf/config.xml
 ```
 ## contribute
 ### python
@@ -87,6 +48,7 @@ python setup.py bdist_wheel \
 && pip install --upgrade . \
 && python3 -m pip install --upgrade build #--force 
 ```
+- you can also use the build.sh script
 - create pull request
 
 ## motivation
