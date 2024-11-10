@@ -6,6 +6,7 @@ assign lan interfaces, create vlans, vlan-interfaces and setup dhcp in a single 
 pip install opnsense-helper
 ```
 ## usage
+> you can run the provided snippets directly by pulling the [example file](https://github.com/the-pod-shop/opnsense-helper/blob/main/python/examples/add_vlans.py)
 * import the package and define the needed variables for the main class
 
 ```python
