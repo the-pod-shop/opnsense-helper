@@ -6,36 +6,16 @@ import requests
 import os
 
 aliases={
-"parentinterface": "if",
+"parent": "if",
 "_from":"from",
 "_to":"to",
 "interface":"if"
 }
 
-#curl -k -u $OPNS_KEY:$OPNS_SECRET https://$IPFW/api/diagnostics/interface/getinterfaceconfig
-
-def parseChild(parent, tag):
-    result=parent.find(tag)
-
-    element=result.text if  result is not None else None
-    return element
-
-def get_child(root,element, id, keys):
-    elements=[]
-    for parent in root.findall(element):
-        child= {}
-        for y in keys:
-            child[y]=None
-        for x in parent.findall(id):
-            for key in keys:
-                child[key]=parseChild(x, key)
-        elements.append(child)
-    return elements
-def parseChild(parent, tag):
-    result=parent.find(tag)
-
-    element=result.text if  result is not None else None
-    return element
+def parseChild(child, tag):
+        result=child.find(tag)
+        element=result.text if  result is not None else None
+        return element
 
 def ping(helper):
     response = os.system(f"ping -c 1 {helper.host}")
@@ -43,54 +23,15 @@ def ping(helper):
         print(f"IP {helper.host} is reachable")
         return 0
     else: return 1
-def api_get(helper, command,params=None):
-    #url= "https://192.168.1.103/api/interfaces/vlan_settings/get"
-    s="s" if helper.ssl is True else ""
-    url = f"http{s}://{helper.host}/api/{command}"
-    r = requests.get(url, verify=helper.verify, params=params,  auth=(helper.api_key, helper.api_secret))
 
+def reconfigure_vlans(helper):
+    stdin, stdout, stderr = helper.ssh.exec_command('/usr/local/opnsense/scripts/interfaces/reconfigure_vlans.php')
+    output = stdout.read().decode('utf-8')
+    print(output)
+    error = stderr.read().decode('utf-8')
+    if error:
+        print(f"Fehler: {error}")
 
-    if r.status_code == 200:
-        if 'application/json' in r.headers['Content-Type']:
-            # Verwenden Sie json.dump
-            response = json.loads(r.content)
-        else:
-            # Verwenden Sie ET.fromstring
-            response = ET.fromstring(r.content)
-        return (response)
-    else:
-        print ('Connection / Authentication issue, response received:')
-        print (r.text)
-def api_post(helper, command, Data):
-    def post(Data,url):
-        return requests.post(url, verify=helper.verify, allow_redirects=False, headers={'Content-Type': 'application/json'},  auth=(helper.api_key, helper.api_secret), data=Data)
-    def fail(error):
-        print ('Connection / Authentication issue, response received:')
-        print (error)
-    def success(response):
-        response = json.loads(r.text)
-        return (response)
-    Data=json.dumps(Data)
-    s="s" if helper.ssl is True else ""
-    url = f"http{s}://{helper.host}/api/{command}"
-    r = post(Data,url)
-    if r.status_code == 200:
-        return success(r)
-    # if we fail because of redirect we start a new request
-    # if we allow redirect in the first place, our post request will get turned in a get request
-    elif r.status_code == 301:
-        new_url = r.headers['Location']
-        r = post(Data,new_url)
-        if r.status_code == 200:
-            return success(r)
-        else:
-            fail(r.text)
-    else:
-        fail(r.text)
-def get_vlans(helper):
-    command="interfaces/vlan_settings/get"
-    vlans=api_get(helper,command)
-    print(vlans)     
 
 def get_element(root,id, obj):
     for x in root.findall(id):
@@ -121,7 +62,6 @@ def update_xml_file(objects,root,type):
     el = root.find(type)
     el.clear()
     for key, value in objects.items():
-        print(objects)
         if(type=="vlans"):
             key="vlan"
 
@@ -130,3 +70,26 @@ def update_xml_file(objects,root,type):
         else:
             e=ET.SubElement(el,key)
         recoursion(e,value)
+
+# deprecated due to a logic fail
+def get_child(root,element, id, keys):
+    elements=[]
+    for parent in root.findall(element):
+        child= {}
+        for y in keys:
+            child[y]=None
+        for x in parent.findall(id):
+            for key in keys:
+                child[key]=parseChild(x, key)
+        elements.append(child)
+    return elements
+
+def replace(item):
+    Data = {}
+    #data='{"vlan": {"descr": "example2", "if": "vtnet1", "tag": 110, "pcp": 0, "vlanif": "vlan0.110"}}'
+    for key, value in item.items():
+        if key in aliases.keys():
+            Data[aliases[key]] = value
+        else:
+            Data[key] = value 
+    return Data

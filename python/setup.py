@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='opnsense_helper',
-    version='0.1.9',    
+    version='0.1.10',    
     description='assign lan interfaces, create vlans, vlan-interfaces and setup dhcp in a single script.',
     url='https://github.com/the-pod-shop/opnsense-helper/',
     author='ji-podhdead',

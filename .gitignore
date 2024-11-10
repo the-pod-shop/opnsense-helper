@@ -5,6 +5,10 @@
 *.crt
 *.certbot
 
+*.build
+*.egg-info
+*.__pycache__
+
 # Kompilierte Dateien
 __pycache__
 *.py[cod]

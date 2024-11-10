@@ -2,6 +2,7 @@ README.md
 setup.py
 opnsense_helper/__init__.py
 opnsense_helper/classes.py
+opnsense_helper/frontend_utils.py
 opnsense_helper/utils.py
 opnsense_helper.egg-info/PKG-INFO
 opnsense_helper.egg-info/SOURCES.txt

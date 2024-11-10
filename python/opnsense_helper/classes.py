@@ -3,9 +3,10 @@ import paramiko
 import xml.etree.ElementTree as ET
 import logging
 
-from opnsense_helper.utils import parseChild, update_xml_file,  get_element, api_get, api_post, aliases
+from opnsense_helper.utils import parseChild, update_xml_file, aliases, reconfigure_vlans
+from opnsense_helper.frontend_utils import api_get,api_post
 class Interface:
-    def __init__(self, name, parent):
+    def __init__(self, parent):
         self.descr = parseChild(parent, "descr")
         self.enable = parseChild(parent, "enable")
         self.ipaddr = parseChild(parent, "ipaddr")
@@ -16,7 +17,7 @@ class Interface:
         self.attr={}
 
 class Vlan:
-    def __init__(self,name, parent):
+    def __init__(self,parent):
         self.parentinterface =parseChild(parent, "if")
         self.tag = parseChild(parent,"tag")
         self.pcp = parseChild(parent,"pcp")
@@ -26,14 +27,18 @@ class Vlan:
         self.attr={}
 
 class Dhcpd:
-    def __init__(self, name, parent):
+    def __init__(self, parent,tag):
         self.enable = parseChild(parent, "enable")
         self.ddnsdomainalgorithm = parseChild(parent, "ddnsdomainalgorithm")
-        self.range={
-            "_from":"",
-            "_to":""
-        }
         self.attr={}
+        self._range={
+        "_from": parent.find("range/from"),
+        "_to":parent.find("range/to")
+        }
+        if self._range["_from"] is not None:
+            self._range["_from"]=self._range["_from"].text
+            self._range["_to"]=self._range["_to"].text
+
 class Opnsense_Helper():
     def __init__(self, host=None, ssh_auth=None, api_auth=None, filepath="./config.xml", verbose=False):
         if(verbose):
@@ -43,13 +48,15 @@ class Opnsense_Helper():
         "dhcpd":{},
         "interfaces":{}
         }
-        self.filepath= filepath
-        self.ssh = paramiko.SSHClient()
-        self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        self.ssh.connect(host, username=ssh_auth["user"], password=ssh_auth["passw"])
-        if("api_key" in api_auth):
+        self.url = host
+        if(ssh_auth!=None):
+            self.filepath= filepath
+            self.ssh = paramiko.SSHClient()
+            self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            self.ssh.connect(host, username=ssh_auth["user"], password=ssh_auth["passw"])
             self.sftp = self.ssh.open_sftp() 
-            self.url = host
+            
+        if(api_auth!=None):
             self.api_key = api_auth["api_key"]
             self.api_secret = api_auth["api_secret"]
             self.ssl=api_auth["ssl"]
@@ -70,6 +77,7 @@ class Opnsense_Helper():
         self.get_all("dhcpd")
         self.get_all("vlans")
         self.get_all("interfaces")
+
     def save(self,output):
         """
         Save the current configuration to a file.
@@ -83,11 +91,15 @@ class Opnsense_Helper():
         output : str
             The path to the file to which the configuration should be written.
         """
-        update_xml_file(self.objects["dhcpd"],self.root,"dhcpd")
-        update_xml_file(self.objects["interfaces"],self.root,"interfaces")
-        #update_xml_file(self.objects["vlans"],self.root,"vlans")
+        if len(self.objects["dhcpd"]) > 0:
+            update_xml_file(self.objects["dhcpd"],self.root,"dhcpd")
+        if len(self.objects["interfaces"]) > 0:
+            update_xml_file(self.objects["interfaces"],self.root,"interfaces")
+        if len(self.objects["vlans"]) > 0:
+            update_xml_file(self.objects["vlans"],self.root,"vlans")
         with open(output, 'w') as f:
             f.write(ET.tostring(self.root, encoding='unicode', method='xml'))
+   
     def get_all(self,element):
         """
         Get all objects of a given type from the in-memory xml data.
@@ -110,36 +122,32 @@ class Opnsense_Helper():
         print(f'''          -----------------------------
                     {element}''')
         for parent in self.root.findall(element):
-            for key in parent:
-                if element== "dhcpd":
-                        child = Dhcpd(key.tag,parent)
-                elif element== "interfaces":
-                        child = Interface(key.tag,parent)
-                elif element== "vlans":
-                        child = Vlan(key.tag,parent)
+            for child in parent:
 
-                child=get_element(parent, key.tag, child)
                 if element== "dhcpd":
-                    _range={"_from": parent.find(key.tag).find("range/from"),
-                    "_to":parent.find(key.tag).find("range/to")}
-                    if _range["_from"] is not None:
-                        _range["_from"]=_range["_from"].text
-                        _range["_to"]=_range["_to"].text
-                        child.range =_range
+                        child_object = Dhcpd(child,child.tag)
+                elif element== "interfaces":
+                        child_object = Interface(child)
+                elif element== "vlans":
+                        child_object = Vlan(child)
                 
-                child.attr=key.attrib if key.attrib is not None else None
-                print(child.attr) 
                 if element != "vlans": 
-                    name = key.tag
+                    name = child.tag
                 else:
-                     name = child.descr
-                self.objects[element][name]=child.__dict__
-                print(f'''{key.tag} : {child.__dict__}
+                     name = child_object.descr
+                
+                child_object.attr=child.attrib if child.attrib is not None else None
+                print(child_object.attr) 
+
+                self.objects[element][name]=child_object.__dict__
+                print(f'''{child.tag} : {child_object.__dict__}
                 -------------------''')
         return(self.objects[element])
+    
     def close_con(self):
         self.sftp.close()
         self.ssh.close()
+
     def put_file(self, _from,_to):    
         """
         Apply the configuration.
@@ -153,6 +161,10 @@ class Opnsense_Helper():
             The destination path on the remote host where the file should be stored.
         """
         self.sftp.put(_from, _to)
+        if len(self.objects["vlans"]) > 0:
+            reconfigure_vlans(self)
+
+
     def add_Items(self,type, data):
         """
         Add objects of a given type to the in-memory xml data.
@@ -184,31 +196,15 @@ class Opnsense_Helper():
                 else:
                     Data[key] = value 
             return Data
-        print(type)
-        print(data)
-        print(self.objects)
         # if( type== "vlans"):
         #     vlans= api_get(self,"interfaces/vlan_settings/get")
-        for name, value in data.items():
+        for value in data:
             value["attr"]={}
-            self.objects[type][name] = value
-    def set_vlans(self,vlans):
-        for value in vlans:
-                    print("---------set vlan-----------------")
-                    payload={"vlan":value}
-                    r=api_post(self,"interfaces/vlan_settings/set",payload)
-                    print(r)
-    def add_vlans(self,vlans):
-        for value in vlans:
-            print("---------add vlan-----------------")
-            print(value)
-            payload={"vlan":value}
-            r=api_post(self,"interfaces/vlan_settings/addItem",payload)
-            print(r)
-            r=api_post(self,"interfaces/vlan_settings/reconfigure",{})
-            print(r)
-    # please use the get_backup function to avoid losing data
-    
+            id=value["id"]
+            value.pop("id")
+            self.objects[type][id] = value
+
+
     def get_conf(self,_from,_to=None):
         """
         Get the config file from the remote host and save it to a file.
@@ -226,6 +222,8 @@ class Opnsense_Helper():
         self.sftp.get(_from,_to)
         self.tree = ET.parse(_to)
         self.root = self.tree.getroot()
+
+# deprecated
     def get_backup(self,output=None):
         """
         this function is currently deprecated
@@ -244,6 +242,22 @@ class Opnsense_Helper():
         # with open(path, 'w') as f:
         #     f.write(ET.tostring(backup, encoding='unicode', method='xml'))
 
-     #   getRes(self.host, command, self.api_key, self.api_secret, timeout)
 
-
+# deprecated
+    def vlans_api(self,vlans, command="add"):
+        if command == "add":
+            for value in vlans:
+                print("---------add vlan-----------------")
+                print(value)
+                payload={"vlan":value}
+                r=api_post(self,"interfaces/vlan_settings/addItem",payload)
+                print(r)
+                r=api_post(self,"interfaces/vlan_settings/reconfigure",{})
+                print(r)
+        elif command == "set":
+            for value in vlans:
+                    print("---------set vlan-----------------")
+                    payload={"vlan":value}
+                    r=api_post(self,"interfaces/vlan_settings/set",payload)
+                    print(r)
+    
