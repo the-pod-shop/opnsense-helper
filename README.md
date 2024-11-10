@@ -65,12 +65,12 @@ def using_api():
 ```
 ### Variables
 #### Opnsense_Helper
-(host=host,ssh_auth=auth,filepath=output, verbose=False)
 | var | type | description |
 | --- | --- | --- | 
 | host| str | ip or hostname |
 | auth | dict {user: str, passw: str} | SSH authentication dictionary |
-
+| filepath | str | temp path required to copy the updated xml |
+| verbose | bool | debug frontend api calls |
 
 
 #### Module Args
