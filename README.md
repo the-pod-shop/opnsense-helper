@@ -1,5 +1,9 @@
 # opnsense-helper
-assign lan interfaces, create vlans, vlan-interfaces and setup dhcp in a single script using the opnsense backend.
+- assign and enable lan / phy interfaces! - ***Not enabled in the opnsense api***
+- create vlans, vlan-interfaces - ***Not enabled in the opnsense api***
+- setup dhcp
+- uses the opnsense backend via shh - ***much faster than the frontend api!!!***
+ 
 ## install 
 ## pip
 ```bash
