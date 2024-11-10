@@ -13,17 +13,7 @@ aliases={
 }
 
 #curl -k -u $OPNS_KEY:$OPNS_SECRET https://$IPFW/api/diagnostics/interface/getinterfaceconfig
-def get_child(root,element, id, keys):
-    elements=[]
-    for parent in root.findall(element):
-        child= {}
-        for y in keys:
-            child[y]=None
-        for x in parent.findall(id):
-            for key in keys:
-                child[key]=parseChild(x, key)
-        elements.append(child)
-    return elements
+
 def parseChild(parent, tag):
     result=parent.find(tag)
 

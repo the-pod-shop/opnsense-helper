@@ -85,7 +85,7 @@ class Opnsense_Helper():
         """
         update_xml_file(self.objects["dhcpd"],self.root,"dhcpd")
         update_xml_file(self.objects["interfaces"],self.root,"interfaces")
-        update_xml_file(self.objects["vlans"],self.root,"vlans")
+        #update_xml_file(self.objects["vlans"],self.root,"vlans")
         with open(output, 'w') as f:
             f.write(ET.tostring(self.root, encoding='unicode', method='xml'))
     def get_all(self,element):
@@ -129,7 +129,10 @@ class Opnsense_Helper():
                 
                 child.attr=key.attrib if key.attrib is not None else None
                 print(child.attr) 
-                name = key.tag if element != "vlans" else child.descr
+                if element != "vlans": 
+                    name = key.tag
+                else:
+                     name = child.descr
                 self.objects[element][name]=child.__dict__
                 print(f'''{key.tag} : {child.__dict__}
                 -------------------''')
@@ -202,7 +205,8 @@ class Opnsense_Helper():
             payload={"vlan":value}
             r=api_post(self,"interfaces/vlan_settings/addItem",payload)
             print(r)
-
+            r=api_post(self,"interfaces/vlan_settings/reconfigure",{})
+            print(r)
     # please use the get_backup function to avoid losing data
     
     def get_conf(self,_from,_to=None):

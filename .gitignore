@@ -1,0 +1,64 @@
+# Verschlüsselte Daten
+*.key
+*.pem
+*.pfx
+*.crt
+*.certbot
+
+# Kompilierte Dateien
+__pycache__
+*.py[cod]
+*$py.class
+
+# Log-Dateien
+*.log
+
+# Temporäre Dateien
+*.tmp
+*.swp
+*.swo
+
+# IDE-Spezifische Dateien
+.vscode/
+.idea/
+
+# Python-Verpackungen
+dist/
+build/
+*.egg-info
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Lokale Entwicklungsskripte
+*.pyc
+__init__.py*
+*.so
+*.dylib
+*.dll
+
+# Test-Ausgaben
+test_*.out
+*.test
+
+# Build-Dateien
+*.exe
+*.exe~
+*.bin
+*.class
+
+# Verschlüsselte Dateien
+*.gpg
+*.asc
+
+# Archivierte Dateien
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.zip
+
+# Docker-Dateien
+.DS_Store
+Thumbs.db
