@@ -63,6 +63,7 @@ dhcp=[
 helper.add_Items("dhcpd",dhcp)
 ```
 * save the configuration as xml and copy it back to the firewall
+> this will also reconfigure your vlans for you, if you have any 
 ```python
 helper.save(output)
 helper.put_file(output,conf_path)
