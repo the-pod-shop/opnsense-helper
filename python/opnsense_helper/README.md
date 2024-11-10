@@ -64,7 +64,7 @@ def using_api():
     helper.vlans_api(vlans_api,"add")
 ```
 ### Variables
-#### Opnsense_Helper
+#### Opnsense_Helper 
 (host=host,ssh_auth=auth,filepath=output, verbose=False)
 | var | type | description |
 | --- | --- | --- | 
@@ -80,7 +80,9 @@ def using_api():
 | interfaces | list[dict] |  {id: str, descr: str, enable: int, ipaddr: str, subnet: str, type: str,  virtual: bool,  spoofmac: str, interface: str} |
 | dhcp | list[dict] | {id: str, enable: str, ddnsdomainalgorithm: str, range: {from: str, _to: str}} |
 
-
+## roadmap
+- add routes
+- firewall roules
 
 ### contribute
 - clone, or fork `git@github.com:the-pod-shop/opnsense-helper.git`
