@@ -3,7 +3,9 @@
 - create vlans, vlan-interfaces - ***Not enabled in the opnsense api***
 - setup dhcp
 - uses the opnsense backend via shh - ***much faster than the frontend api!!!***
- 
+- all configctl commands
+- all pluginctl commands
+- all opnsense scripts
 ## Some of the docs are currently outdated
 
 ## install 
