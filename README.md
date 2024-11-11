@@ -4,6 +4,8 @@
 - setup dhcp
 - uses the opnsense backend via shh - ***much faster than the frontend api!!!***
  
+## Some of the docs are currently outdated
+
 ## install 
 ## pip
 ```bash
@@ -15,63 +17,44 @@ pip install opnsense-helper
 
 ```python
 from opnsense_helper.classes import Opnsense_Helper
-output="./config.xml"
-conf_path="/conf/config.xml"
+
 host= "192.168.1.103"
 auth={
 "user":"root",
 "passw":"opnsense",
 }
-helper=Opnsense_Helper(host=host,ssh_auth=auth,filepath=output, verbose=False)
+temp_path="./config.xml"
+helper=Opnsense_Helper(host=host,ssh_auth=auth,temp_path=temp_path, init=True)
 ```
-
-* pull the config.xml from the firewall via ssh
-
-```python
-helper.get_conf(conf_path)
-```
-
-* initialize the the Opnsense_Helper-class and parse the config.xml
-```python
-helper.initialize()
-```
-* add, or edit vlans
+- create the objects of the modules you want to set
 ```python
 vlans=[
-{"id":"vlan1",'parent': 'vtnet1', 'tag': '1', 'pcp': '0', 'proto': None, 'descr': 'vlan1', 'vlanif': 'vlan0.1'},
-{"id":"vlan2",'parent': 'vtnet1', 'tag': '2', 'pcp': '0', 'proto': None, 'descr': 'vlan2', 'vlanif': 'vlan0.2'},
-{"id":"vlan3",'parent': 'vtnet1', 'tag': '3', 'pcp': '0', 'proto': None, 'descr': 'vlan3', 'vlanif': 'vlan0.3'}
+Vlan("vlan1","vtnet1","1"),
+Vlan("vlan2","vtnet1","2"),
+Vlan("vlan3","vtnet1","3")
 ]
 
-helper.add_Items("vlans",vlans)
-```
-
-* add, or edit interfaces
-```python
 interfaces=[
-{"id":"opt1",'descr': 'router', 'enable': '1', 'ipaddr': None, 'subnet': None, 'type': None, 'virtual': None, 'spoofmac': '00:00:00:00:02:01',"interface":"vtnet1"},
-{"id":"opt2",'descr': 'vlan1', 'enable': '1', 'ipaddr': '200.0.3.1', 'subnet': '24', 'type': None, 'virtual': None, 'spoofmac': '00:00:00:00:00:01',"interface":"vlan0.1"},
-{"id":"opt3",'descr': 'vlan2', 'enable': '1', 'ipaddr': '200.0.4.1', 'subnet': '24', 'type': None, 'virtual': None, 'spoofmac': '00:00:00:00:00:02', "interface":"vlan0.2"},
-{"id":"opt4",'descr': 'vlan3', 'enable': '1', 'ipaddr': '200.0.5.1', 'subnet': '24', 'type': None, 'virtual': None, 'spoofmac': '00:00:00:00:00:03', "interface":"vlan0.3"}
+Interface("opt1","router","vtnet1","1","200.1.0.1","24"),
+Interface("opt2","vlan1","vlan0.1", "1", '200.0.1.1', "24", '00:00:00:01:00:01'),
+Interface("opt3","vlan2","vlan0.2", "2", '200.0.2.1', "24", '00:00:00:01:00:02'),
+Interface("opt4","vlan3","vlan0.3", "3", '200.0.3.1', "24", '00:00:00:01:00:03'),
 ]
 
-helper.add_Items("interfaces",interfaces)
-```
-* add or edit dhcpd entries
-```python
 dhcp=[
-{"id":"opt2",'enable': '1', 'ddnsdomainalgorithm': 'hmac-md', "range":{'from': '200.0.3.10', '_to': '200.0.3.100'}},
-{"id":"opt3",'enable': '1', 'ddnsdomainalgorithm': 'hmac-md', "range":{'from': '200.0.4.10', '_to': '200.0.4.100'}}
+Dhcpd("opt1","1",{'from': '200.1.0.2', '_to': '200.1.0.2'}),
+Dhcpd("opt2","1",{'from': '200.0.1.1', '_to': '200.0.1.100'}),
+Dhcpd("opt3","1",{'from': '200.0.2.1', '_to': '200.0.2.100'}),
+Dhcpd("opt4","1",{'from': '200.0.3.1', '_to': '200.0.3.100'}),
 ]
-
-helper.add_Items("dhcpd",dhcp)
 ```
-* save the configuration as xml and copy it back to the firewall
-> this will also reconfigure your vlans for you, if you have any 
+- assign the config
 ```python
-helper.save(output)
-helper.put_file(output,conf_path)
-helper.close_con()   
+helper.set("interfaces",interfaces)
+helper.set("dhcpd",dhcp)
+helper.set("vlans",vlans)
+helper.save(temp_path)
+#helper.remove_items()
 ```
 
 ### Frontend Api
@@ -110,6 +93,30 @@ def using_api():
 | interfaces | list[dict] |  {id: str, descr: str, enable: int, ipaddr: str, subnet: str, type: str,  virtual: bool,  spoofmac: str, interface: str} |
 | dhcp | list[dict] | {id: str, enable: str, ddnsdomainalgorithm: str, range: {from: str, _to: str}} |
 
+#### Manual steps
+
+* pull the config.xml from the firewall via ssh
+
+```python
+helper.get_conf(conf_path)
+```
+
+* initialize the the Opnsense_Helper-class and parse the config.xml
+```python
+helper.initialize()
+```
+- add the items
+```python
+helper.add_Items("vlans",vlans)
+```
+
+* save the configuration as xml and copy it back to the firewall
+> this will also reconfigure your vlans for you, if you have any 
+```python
+helper.save(output)
+helper.put_file(output,conf_path)
+helper.close_con()   
+```
 
 
 ### contribute

@@ -4,12 +4,42 @@ import json
 import xml.etree.ElementTree as ET
 import requests
 import os
+reconfigure={
+    "reconfigure_vlans": {"command":'/usr/local/opnsense/scripts/interfaces/reconfigure_vlans.php'},
+    "reconfigure_interface": {"command":"configctl interface reconfigure", "flags":[] }
+}
 
+pluginctl={
+        #  -4 IPv4 address mode, return primary address of interface
+        # -c configure mode (default), executes plugin [_configure] hook
+        # -D ifconfig mode, lists available devices
+        # -d device mode, lists registered devices
+        # -f flush config property (raw, e.g. system.firmware.plugins)
+        # -g get config property (raw, e.g. system.firmware.plugins)
+        # -h show this help text and exit
+        # -I information mode, lists registered device statistics
+        # -i invoke dynamic interface registration
+        # -r run mode (e.g. command)
+        # -S service metadata dump
+        # -s service mode (e.g. myservice restart)
+    "ipv4":{"argument":None,"command":"pluginctl -4"},
+    "config":{"argument":None, "flags":[],"command":"pluginctl -c"},
+    "ifconfig":{"argument":None,"command":"pluginctl -D"},
+    "device_info":{"argument":None,"command":"pluginctl -d"},
+    "flush":{"argument":None,"command":"pluginctl -f"},
+    "get":{"argument":None, "flags":[],"command":"pluginctl -g"},
+    "info":{"argument":None, "flags":[],"command":"pluginctl -I" },
+    "if_reg":{"argument":None,"command":"pluginctl -i"},
+    "run":{"argument":None,"command":"pluginctl -r"},
+    "service_dump":{"argument":None,"command":"pluginctl -S"},
+    "service":{"argument":None, "flags":[],"command":"pluginctl -s"} # stop start resta, rt
+}
 aliases={
 "parent": "if",
 "_from":"from",
 "_to":"to",
-"interface":"if"
+"interface":"if",
+"_range":"range"
 }
 
 def parseChild(child, tag):
@@ -23,9 +53,11 @@ def ping(helper):
         print(f"IP {helper.host} is reachable")
         return 0
     else: return 1
-
-def reconfigure_vlans(helper):
-    stdin, stdout, stderr = helper.ssh.exec_command('/usr/local/opnsense/scripts/interfaces/reconfigure_vlans.php')
+def format_flags(flags_array):
+    return ' '.join(map(str, flags_array))
+def exec(helper, obj):
+    flags= format_flags[obj["flags"]] if obj["flags"] is not [] else "" 
+    stdin, stdout, stderr = helper.ssh.exec_command(f"""{obj["command"]} {obj["argument"]if obj["argument"] is not None else ""} {flags}""")
     output = stdout.read().decode('utf-8')
     print(output)
     error = stderr.read().decode('utf-8')
@@ -64,8 +96,7 @@ def update_xml_file(objects,root,type):
     for key, value in objects.items():
         if(type=="vlans"):
             key="vlan"
-
-        if value["attr"] is not None:
+        if value["attr"] is not {}:
              e = ET.SubElement(el, key,value["attr"])
         else:
             e=ET.SubElement(el,key)

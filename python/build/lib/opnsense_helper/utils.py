@@ -9,7 +9,8 @@ aliases={
 "parent": "if",
 "_from":"from",
 "_to":"to",
-"interface":"if"
+"interface":"if",
+"_range":"range"
 }
 
 def parseChild(child, tag):
@@ -64,8 +65,7 @@ def update_xml_file(objects,root,type):
     for key, value in objects.items():
         if(type=="vlans"):
             key="vlan"
-
-        if value["attr"] is not None:
+        if value["attr"] is not {}:
              e = ET.SubElement(el, key,value["attr"])
         else:
             e=ET.SubElement(el,key)
