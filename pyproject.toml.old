@@ -1,0 +1,18 @@
+[project]
+name = "opnsense_helper"
+version = "0.1.1"
+authors = [
+  { name="ji.podhdead", email="ji-podhead@podshop.com" },
+]
+description = "assign lan interfaces, create vlans, vlan-interfaces and setup dhcp in a single script."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/the-pod-shop/opnsense-helper/"
+Issues = "https://github.com/the-pod-shop/opnsense-helper/issues"
