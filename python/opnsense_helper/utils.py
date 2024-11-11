@@ -5,10 +5,45 @@ import xml.etree.ElementTree as ET
 import requests
 import os
 reconfigure={
-    "reconfigure_vlans": {"command":'/usr/local/opnsense/scripts/interfaces/reconfigure_vlans.php'},
-    "reconfigure_interface": {"command":"configctl interface reconfigure", "flags":[] }
+    "vlans": {"command":'/usr/local/opnsense/scripts/interfaces/reconfigure_vlans.php'},
+    "interfaces": {"command":"configctl interface reconfigure", "flags":[] }
 }
-
+configctl={
+#    optional arguments:
+#   -h, --help  show this help message and exit
+#   -m          execute multiple arguments at once
+#   -e          use as event handler, execute command on receiving input
+#   -d          detach the execution of the command and return immediately
+#   -q          run quietly by muting standard output
+#   -w W        wait specified amount of seconds for socket to become available
+#   -t T        threshold between events, wait this interval before executing commands, combine input into single events
+"auth":{"command":"configctl auth", "argument":None,"flags":[]},
+"captiveportal":{"command":"configctl captiveportal", "argument":None,"flags":[]},
+"configd":{"command":"configctl configd", "argument":None,"flags":[]},
+"cron":{"command":"configctl cron", "argument":None,"flags":[]},
+"dhcpd":{"command":"configctl dhcpd", "argument":None,"flags":[]},
+"dhcpd6":{"command":"configctl dhcpd6", "argument":None,"flags":[]},
+"dns":{"command":"configctl dns", "argument":None,"flags":[]},
+"filter":{"command":"configctl filter", "argument":None,"flags":[]},
+"firmware":{"command":"configctl firmware", "argument":None,"flags":[]},
+"health":{"command":"configctl health", "argument":None,"flags":[]},
+"ids":{"command":"configctl ids", "argument":None,"flags":[]},
+"interface":{"command":"configctl interface", "argument":None,"flags":[]},
+"ipfw":{"command":"configctl ipfw", "argument":None,"flags":[]},
+"ipsec":{"command":"configctl ipsec", "argument":None,"flags":[]},
+"kea":{"command":"configctl kea", "argument":None,"flags":[]},
+"monit":{"command":"configctl monit", "argument":None,"flags":[]},
+"netflow":{"command":"configctl netflow", "argument":None,"flags":[]},
+"openssh":{"command":"configctl openssh", "argument":None,"flags":[]},
+"openvpn":{"command":"configctl openvpn", "argument":None,"flags":[]},
+"syslog":{"command":"configctl syslog", "argument":None,"flags":[]},
+"system":{"command":"configctl system", "argument":None,"flags":[]},
+"template":{"command":"configctl template", "argument":None,"flags":[]},
+"unbound":{"command":"configctl unbound", "argument":None,"flags":[]},
+"webgui":{"command":"configctl webgui", "argument":None,"flags":[]},
+"wireguard":{"command":"configctl wireguard", "argument":None,"flags":[]},
+"zfs":{"command":"configctl zfs", "argument":None,"flags":[]},
+}
 pluginctl={
         #  -4 IPv4 address mode, return primary address of interface
         # -c configure mode (default), executes plugin [_configure] hook
