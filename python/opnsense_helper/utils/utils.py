@@ -1,8 +1,4 @@
 import xml.etree.ElementTree as ET
-# import libraries
-import json
-import xml.etree.ElementTree as ET
-import requests
 import os
 
 aliases={
@@ -27,9 +23,11 @@ def ping(helper):
 def format_flags(flags_array):
     return ' '.join(map(str, flags_array))
 def exec(helper, obj):
-    flags= format_flags[obj["flags"]] if obj["flags"] is not [] else "" 
-    stdin, stdout, stderr = helper.ssh.exec_command(f"""{obj["command"]} {obj["argument"]if obj["argument"] is not None else ""} {flags}""")
+    flags= format_flags(obj["flags"]) if obj["flags"] is not [] else "" 
+    command=f"""{obj["command"]} {obj["argument"]if obj["argument"] is not None else ""} {flags}"""
+    stdin, stdout, stderr = helper.ssh.exec_command(command)
     output = stdout.read().decode('utf-8')
+    print("$ "+command)
     print(output)
     error = stderr.read().decode('utf-8')
     if error:

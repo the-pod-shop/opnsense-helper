@@ -5,6 +5,44 @@ import xml.etree.ElementTree as ET
 import requests
 import os
 
+# deprecated
+def get_backup(helper,output=None):
+    """
+    this function is currently deprecated
+    it was used to get the config file using the api
+    i left it in however if someone wants to fetch a certain backup 
+    i need to implement the backup selection though
+    """
+    command = 'core/backup/download/this'
+    backup=api_get(helper,command)
+    helper.root=backup
+    print(ET.tostring(backup, encoding='unicode'))
+    # if output != None:
+    #     path=output
+    # else:
+    #     path = self.temp_path
+    # with open(path, 'w') as f:
+    #     f.write(ET.tostring(backup, encoding='unicode', method='xml'))
+
+
+# deprecated
+def vlans_api(helper,vlans, command="add"):
+    if command == "add":
+        for value in vlans:
+            print("---------add vlan-----------------")
+            print(value)
+            payload={"vlan":value}
+            r=api_post(helper,"interfaces/vlan_settings/addItem",payload)
+            print(r)
+            r=api_post(helper,"interfaces/vlan_settings/reconfigure",{})
+            print(r)
+    elif command == "set":
+        for value in vlans:
+                print("---------set vlan-----------------")
+                payload={"vlan":value}
+                r=api_post(helper,"interfaces/vlan_settings/set",payload)
+                print(r)
+    
 
 def ping(helper):
     response = os.system(f"ping -c 1 {helper.host}")

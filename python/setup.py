@@ -2,13 +2,13 @@ from setuptools import setup
 
 setup(
     name='opnsense_helper',
-    version='0.1.10',    
+    version='0.1.20',    
     description='assign lan interfaces, create vlans, vlan-interfaces and setup dhcp in a single script.',
     url='https://github.com/the-pod-shop/opnsense-helper/',
     author='ji-podhdead',
     author_email='ji.podhdead@proton.me',
     license='BSD 2-clause',
-    packages=['opnsense_helper'],
+    packages=['opnsense_helper', "opnsense_helper.utils", "opnsense_helper.scripts", "opnsense_helper.commands", "opnsense_helper.config_manager"],
     install_requires=['paramiko',                     
                       ],
     classifiers=[

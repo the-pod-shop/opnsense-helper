@@ -1,12 +1,8 @@
 # opnsense-helper
-- assign and enable lan / phy interfaces! - ***Not enabled in the opnsense api***
-- create vlans, vlan-interfaces - ***Not enabled in the opnsense api***
-- setup dhcp
-- uses the opnsense backend via shh - ***much faster than the frontend api!!!***
-- all configctl commands
-- all pluginctl commands
-- all opnsense scripts
-## Some of the docs are currently outdated
+- create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
+- use the config_manager to apply all your configs in runtime at once
+- uses the opnsense backend via shh 
+
 
 ## install 
 ## pip
@@ -15,10 +11,13 @@ pip install opnsense-helper
 ```
 ## usage
 > you can run the provided snippets directly by pulling the [example file](https://github.com/the-pod-shop/opnsense-helper/blob/main/python/examples/add_vlans.py)
+
+### required variables
 * import the package and define the needed variables for the main class
 
 ```python
-from opnsense_helper.classes import Opnsense_Helper
+from opnsense_helper.opnsense_helper import Opnsense_Helper
+from opnsense_helper.config_manager.config_manager import Vlan, Dhcpd, Interface
 
 host= "192.168.1.103"
 auth={
@@ -28,6 +27,9 @@ auth={
 temp_path="./config.xml"
 helper=Opnsense_Helper(host=host,ssh_auth=auth,temp_path=temp_path, init=True)
 ```
+### config_manager
+> add  or change existing modules
+> - currently supports vlans, dhcpd, interfaces and soon routes, as well as firewall rules
 - create the objects of the modules you want to set
 ```python
 vlans=[
@@ -58,6 +60,55 @@ helper.set("vlans",vlans)
 helper.save(temp_path)
 #helper.remove_items()
 ```
+### scripts and commands
+> - you can run every script fron `/usr/local/opnsense/scripts/`
+> - you can use every `pluginctl` and `configctl` commands
+> - use `<command: str> <argument:str> <flags:arr>`
+> - besides command, argument may be required based on the method
+
+```python
+    helper.scripts.system.run("status")
+    helper.scripts.routes.run("show_routes")
+
+    helper.commands.pluginctl.run("ipv4")
+    helper.commands.pluginctl.run("service", "dhcpd status")
+    helper.commands.pluginctl.run("config", "dhcp")
+```
+#### Result
+```bash
+$ /usr/local/opnsense/scripts/system/status.php*  
+{"CrashReporter":{"statusCode":2,"message":"No problems were detected.","logLocation":"\/crash_reporter.php","timestamp":"0"},"Firewall":{"statusCode":-1,"message":"There were error(s) loading the rules: \/tmp\/rules.debug:25: syntax error - The line in question reads [25]: set loginterface \n","logLocation":"\/ui\/diagnostics\/log\/core\/firewall","timestamp":1731025409}}
+
+$ /usr/local/opnsense/scripts/routes/show_routes.py*  
+destination             gateway         flags           nhop#           mtu             netif           expire
+ipv4    default 192.168.0.1     UGS     5       1500    vtnet0
+ipv4    localhost       link#4  UH      2       16384   lo0
+ipv4    192.168.0.1     link#1  UHS     4       1500    vtnet0
+ipv4    192.168.1.0/24  link#1  U       1       1500    vtnet0
+ipv4    192.168.1.1     link#1  UHS     4       1500    vtnet0
+ipv4    192.168.1.103   link#1  UHS     3       16384   lo0
+ipv4    200.1.0.0/24    link#2  U       6       1500    vtnet1
+ipv4    200.1.0.1       link#2  UHS     7       16384   lo0
+ipv6    localhost       link#4  UHS     1       16384   lo0
+ipv6    fe80::%lo0/64   link#4  U       3       16384   lo0
+ipv6    fe80::1%lo0     link#4  UHS     2       16384   lo0
+
+$ pluginctl -4  
+{
+    "address": null,
+    "network": null,
+    "bits": null,
+    "device": null,
+    "interface": null
+}
+
+$ pluginctl -s dhcpd status 
+dhcpd is running as pid 16072.
+
+$ pluginctl -c dhcp 
+Starting DHCPv4 service...done.
+```
+
 
 ### Frontend Api
 - you can download the config.xml and add vlans via api
@@ -95,29 +146,29 @@ def using_api():
 | interfaces | list[dict] |  {id: str, descr: str, enable: int, ipaddr: str, subnet: str, type: str,  virtual: bool,  spoofmac: str, interface: str} |
 | dhcp | list[dict] | {id: str, enable: str, ddnsdomainalgorithm: str, range: {from: str, _to: str}} |
 
-#### Manual steps
+#### config_manager manual usage
 
 * pull the config.xml from the firewall via ssh
 
 ```python
-helper.get_conf(conf_path)
+helper.config_manager.get_conf(conf_path)
 ```
 
 * initialize the the Opnsense_Helper-class and parse the config.xml
 ```python
-helper.initialize()
+helper.config_manager.initialize()
 ```
 - add the items
 ```python
-helper.add_Items("vlans",vlans)
+helper.config_manager.add_Items("vlans",vlans)
 ```
 
 * save the configuration as xml and copy it back to the firewall
 > this will also reconfigure your vlans for you, if you have any 
 ```python
-helper.save(output)
-helper.put_file(output,conf_path)
-helper.close_con()   
+helper.config_manager.save(output)
+helper.config_manager.put_file(output,conf_path)
+helper.config_manager.close_con()   
 ```
 
 

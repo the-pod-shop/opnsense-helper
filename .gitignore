@@ -16,7 +16,7 @@ __pycache__
 
 # Log-Dateien
 *.log
-
+config.xml
 # Temporäre Dateien
 *.tmp
 *.swp

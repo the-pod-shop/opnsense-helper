@@ -1,14 +1,7 @@
 
-import paramiko
-from lxml import etree
 import xml.etree.ElementTree as ET
-import logging
 from xmldiff import main, formatting
-from opnsense_helper.utils import parseChild, update_xml_file, aliases, reconfigure_vlans
-from opnsense_helper.frontend_utils import api_get,api_post
-
-{"id":"router",'descr': 'router', 'enable': '1', 'ipaddr': '200.1.0.1','spoofmac': '00:00:00:01:00:01',"interface":"vtnet1"},
-
+from  opnsense_helper.utils.utils import parseChild, update_xml_file
 class Interface:
     """
     ***Creates a Interface object.***
@@ -110,37 +103,16 @@ class Dhcpd:
             self._range["_from"]=self._range["_from"].text
             self._range["_to"]=self._range["_to"].text
 
-class Opnsense_Helper():
-    def __init__(self, host=None, ssh_auth=None, api_auth=None, conf_path="/conf/config.xml", temp_path="./config.xml", verbose=False, init=True):
-        if(verbose):
-            self.logging=logging.basicConfig(level=logging.DEBUG)
-        self.objects={
-        "vlans":{},
-        "dhcpd":{},
-        "interfaces":{}
-        }
-        self.url = host
-        self.conf_path=conf_path
-
-        if(ssh_auth!=None):
-            self.temp_path= temp_path
-            self.ssh = paramiko.SSHClient()
-            self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            self.ssh.connect(host, username=ssh_auth["user"], password=ssh_auth["passw"])
-            self.sftp = self.ssh.open_sftp() 
-            
-        if(api_auth!=None):
-            self.api_key = api_auth["api_key"]
-            self.api_secret = api_auth["api_secret"]
-            self.ssl=api_auth["ssl"]
-            self.verify=api_auth["verify"]
-            self.host=host
+class Config_Manager():
+        
+    def __init__(self,  base, init):
+        super().__init__()
+        if base is not None:
+            self.__dict__.update(base.__dict__)
         if init:
             self.get_conf()
             self.initialize() 
 
-    def close(self):
-       self.close_con()
 
     def get_dif(self):
 
@@ -185,6 +157,7 @@ class Opnsense_Helper():
             print("saving ifs")
             update_xml_file(self.objects["interfaces"],self.root,"interfaces")
         if len(self.objects["vlans"]) > 0:
+            
             print("saving vlans")
             update_xml_file(self.objects["vlans"],self.root,"vlans")
         with open(output, 'w') as f:
@@ -241,7 +214,9 @@ class Opnsense_Helper():
     def close_con(self):
         self.sftp.close()
         self.ssh.close()
-
+   # def reconfigure(self,type):
+        
+        
     def put_file(self, _from=None,_to=None):    
         """
         Apply the configuration.
@@ -260,8 +235,14 @@ class Opnsense_Helper():
         b=_to if _to is not None  else self.conf_path
         self.sftp.put(a, b)
         if len(self.objects["vlans"]) > 0:
-            reconfigure_vlans(self)
-
+            self.commands.reconfigure.run("vlans")
+        if len(self.objects["interfaces"]) > 0:
+            for interface,values in self.objects["interfaces"].items():
+                # check if interface is no vlan interface, but a phyInterface
+                phy=values["interface"]
+                if phy!= None and  "vtnet" in phy:
+                    if values["enable"] == "1" and  len(phy)>0: 
+                        self.commands.reconfigure.run("interfaces", values["interface"])
     def remove_items(self,type, items, init=True, apply=True):
         if init:
             self.get_conf()
