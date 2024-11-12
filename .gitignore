@@ -21,7 +21,8 @@ config.xml
 *.tmp
 *.swp
 *.swo
-
+*.dist
+*.build
 # IDE-Spezifische Dateien
 .vscode/
 .idea/
