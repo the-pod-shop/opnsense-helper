@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opnsense-Helper &mdash; opnsense_helper 0.1.20 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=17aaaefc"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="opnsense-helper" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            opnsense_helper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">opnsense-helper</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API-Dokumentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Opnsense-Helper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.opnsense_helper.Opnsense_Helper"><code class="docutils literal notranslate"><span class="pre">Opnsense_Helper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#commands">commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.commands.commands.Commands"><code class="docutils literal notranslate"><span class="pre">Commands</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.commands.commands.configctl"><code class="docutils literal notranslate"><span class="pre">configctl</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.commands.commands.pluginctl"><code class="docutils literal notranslate"><span class="pre">pluginctl</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.commands.commands.reconfigure"><code class="docutils literal notranslate"><span class="pre">reconfigure</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#scripts">scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.Scripts"><code class="docutils literal notranslate"><span class="pre">Scripts</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.Wireguard"><code class="docutils literal notranslate"><span class="pre">Wireguard</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.auth"><code class="docutils literal notranslate"><span class="pre">auth</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.dhcp"><code class="docutils literal notranslate"><span class="pre">dhcp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.dns"><code class="docutils literal notranslate"><span class="pre">dns</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.filter"><code class="docutils literal notranslate"><span class="pre">filter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.firmware"><code class="docutils literal notranslate"><span class="pre">firmware</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.health"><code class="docutils literal notranslate"><span class="pre">health</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.interfaces"><code class="docutils literal notranslate"><span class="pre">interfaces</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.ipsec"><code class="docutils literal notranslate"><span class="pre">ipsec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.netflow"><code class="docutils literal notranslate"><span class="pre">netflow</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.openssh"><code class="docutils literal notranslate"><span class="pre">openssh</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.openvpn"><code class="docutils literal notranslate"><span class="pre">openvpn</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.routes"><code class="docutils literal notranslate"><span class="pre">routes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.shaper"><code class="docutils literal notranslate"><span class="pre">shaper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.shell"><code class="docutils literal notranslate"><span class="pre">shell</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.suricata"><code class="docutils literal notranslate"><span class="pre">suricata</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.syslog"><code class="docutils literal notranslate"><span class="pre">syslog</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.system"><code class="docutils literal notranslate"><span class="pre">system</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.scripts.scripts.unbound"><code class="docutils literal notranslate"><span class="pre">unbound</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">opnsense_helper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Opnsense-Helper</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/python_package.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="opnsense-helper">
+<h1>Opnsense-Helper<a class="headerlink" href="#opnsense-helper" title="Link to this heading"></a></h1>
+<p>Api Docs for Opnsense_Helper pip package.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.opnsense_helper.Opnsense_Helper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.opnsense_helper.</span></span><span class="sig-name descname"><span class="pre">Opnsense_Helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssh_auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/conf/config.xml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./config.xml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_config_manager</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.opnsense_helper.Opnsense_Helper" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize an Opnsense_Helper instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – The hostname or ip address of the opnsense firewall.</p></li>
+<li><p><strong>ssh_auth</strong> – A dictionary containing the ssh authentication data.
+The dictionary must contain the keys “user” and “passw”.</p></li>
+<li><p><strong>api_auth</strong> – A dictionary containing the api authentication data.
+The dictionary must contain the keys “api_key”, “api_secret”, “ssl” and “verify”.</p></li>
+<li><p><strong>conf_path</strong> – The path to the config.xml on the opnsense firewall.</p></li>
+<li><p><strong>temp_path</strong> – The path to the temporary config.xml file.</p></li>
+<li><p><strong>verbose</strong> – If True, the class will print debug messages.</p></li>
+<li><p><strong>init_config_manager</strong> – If True, the class will initialize the config_manager.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="commands">
+<h1>commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h1>
+<p>Commands class lets you call configctl and pluginctl</p>
+<dl class="py class" id="module-opnsense_helper.commands.commands">
+<dt class="sig sig-object py" id="opnsense_helper.commands.commands.Commands">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.commands.commands.</span></span><span class="sig-name descname"><span class="pre">Commands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.commands.commands.Commands" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<section id="class-commands">
+<h2>Class Commands<a class="headerlink" href="#class-commands" title="Link to this heading"></a></h2>
+<p>Initialize the Commands class.
+* its just a wrapper for the pluginctl, configctl and reconfigure classes.</p>
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt>base<span class="classifier">Base_Class </span></dt><dd><ul class="simple">
+<li><p>The parent object containing the needed ssh connection and the temp path to the config.xml.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Returns</strong></p>
+<ul class="simple">
+<li><p>None</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.commands.commands.configctl">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.commands.commands.</span></span><span class="sig-name descname"><span class="pre">configctl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.commands.commands.configctl" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.commands.commands.pluginctl">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.commands.commands.</span></span><span class="sig-name descname"><span class="pre">pluginctl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.commands.commands.pluginctl" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.commands.commands.reconfigure">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.commands.commands.</span></span><span class="sig-name descname"><span class="pre">reconfigure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.commands.commands.reconfigure" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-reconfigure">
+<h2>Class reconfigure<a class="headerlink" href="#class-reconfigure" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Initialize the reconfigure class.</p></li>
+<li><p>Inherits from the Exec_Class class.</p></li>
+</ul>
+<p><strong>Usage</strong>
+.. code-block:: python</p>
+<blockquote>
+<div><p>Commands.reconfigure.run(&lt;command&gt;,&lt;argument&gt;,&lt;flags&gt;)</p>
+</div></blockquote>
+<p><strong>Parameters</strong>
+base : Base_Class instance</p>
+<blockquote>
+<div><p>The parent object containing necessary SSH connection details and
+configuration settings. If provided, its attributes will be copied
+to this instance.</p>
+</div></blockquote>
+<p><strong>Attributes</strong>
+commands : dict</p>
+<blockquote>
+<div><p>A dictionary of command configurations with keys for ‘vlans’ and ‘interfaces’,
+each containing command details such as the command string, arguments, 
+and flags.</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+<section id="scripts">
+<h1>scripts<a class="headerlink" href="#scripts" title="Link to this heading"></a></h1>
+<p>You can call around 80 opnsense scripts.</p>
+<dl class="py class" id="module-opnsense_helper.scripts.scripts">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.Scripts">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">Scripts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.Scripts" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>🐕</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.Wireguard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">Wireguard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.Wireguard" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.auth">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.auth" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.dhcp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">dhcp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.dhcp" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.dns">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">dns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.dns" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.filter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.filter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.firmware">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">firmware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.firmware" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.health">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">health</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.health" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.interfaces">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">interfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.interfaces" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.ipsec">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">ipsec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.ipsec" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.netflow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">netflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.netflow" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.openssh">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">openssh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.openssh" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.openvpn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">openvpn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.openvpn" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.routes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">routes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.routes" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.shaper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">shaper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.shaper" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.shell">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.shell" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.suricata">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">suricata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.suricata" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.syslog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">syslog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.syslog" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.system">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.system" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.unbound">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">unbound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.unbound" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<p>Initializes the unbound class, inheriting from Exec_Class. If a base object 
+is provided, its attributes are copied to the current instance. This 
+initializer also sets up a dictionary of command configurations for various 
+unbound operations.</p>
+<p>Attributes:
+commands (dict): A dictionary where each key is a command name and the 
+value is another dictionary containing:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>command (str): The path to the script associated with the command.</p></li>
+<li><p>flags (list): A list of flags for the command. Currently, these</p></li>
+</ul>
+<p>are empty.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Attributes:</dt><dd><ul class="simple">
+<li><p>wrapper: Executes ‘ubound/wrapper.py’.</p></li>
+<li><p>stats: Executes ‘ubound/stats.py’.</p></li>
+<li><p>start: Executes ‘ubound/start.sh’.</p></li>
+<li><p>restore_db: Executes ‘ubound/restore_db.py’.</p></li>
+<li><p>logger: Executes ‘ubound/logger.py’.</p></li>
+<li><p>check: Executes ‘ubound/check.sh’.</p></li>
+<li><p>cache: Executes ‘ubound/cache.sh’.</p></li>
+<li><p>blocklists: Executes ‘ubound/blocklists.py’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="README.html" class="btn btn-neutral float-left" title="opnsense-helper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ji-podhead.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

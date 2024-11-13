@@ -1,4 +1,5 @@
-from opnsense_helper.classes import Opnsense_Helper, Vlan, Dhcpd, Interface
+from opnsense_helper.opnsense_helper import Opnsense_Helper
+from opnsense_helper.config_manager.config_manager import Vlan, Dhcpd, Interface
 temp_path="./config.xml"
 host= "192.168.1.103"
 def backend():
@@ -27,14 +28,19 @@ def backend():
     "passw":"opnsense",
     }
     
-    helper=Opnsense_Helper(host=host,ssh_auth=auth,temp_path=temp_path, init=True)
-    helper.set("interfaces",interfaces)
-    helper.set("dhcpd",dhcp)
-    helper.set("vlans",vlans)
-    helper.save(temp_path)
-    # helper.remove_items()
+    helper=Opnsense_Helper(host=host,ssh_auth=auth,temp_path=temp_path, init_config_manager=True)
 
+    helper.config_manager.set("interfaces",interfaces)
+    helper.config_manager.set("dhcpd",dhcp)
+    helper.config_manager.set("vlans",vlans)
+    helper.config_manager.save(temp_path)
 
+    helper.scripts.system.run("status")
+    helper.scripts.routes.run("show_routes")
+
+    helper.commands.pluginctl.run("ipv4")
+    helper.commands.pluginctl.run("service", "dhcpd status")
+    helper.commands.pluginctl.run("config", "dhcp")
 
 
 def using_api():

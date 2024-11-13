@@ -12,16 +12,9 @@
         <td>
         <img alt="Static Badge" src="https://img.shields.io/badge/Ansible%20Collection-%F0%9F%9A%A7-darkgrey?style=for-the-badge&color=red">
         </td>
-    <td>
-    <a href="https://github.com/ji-podhead/opnsense-helper/">
-             <img alt="Static Badge" src="https://img.shields.io/badge/open%20source-blue?style=for-the-badge&logo=github">
-            </a>
-        </td>
     </tr>
 </table>
-
-***The backend framework for opnsense***
-
+                
 - create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
 - use the config_manager to apply all your configs in runtime at once
 - uses the opnsense backend via shh 
@@ -29,23 +22,18 @@
 - around 80 opnsense scripts you can call
 - automatically configures your Vlan and Phy Interfaces after applying configuration
 
----
-
-- ***[pypy project](https://pypi.org/project/opnsense-helper)*** 
-- ***[Api Docs](https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html)***
-
----
 
 ## install 
-
-### pip 
+### pip
 ```bash
 pip install opnsense-helper
 ```
-
 ## usage
-
 > -  you can run the provided snippets directly by pulling the [example file](https://github.com/the-pod-shop/opnsense-helper/blob/main/python/examples/add_vlans.py)
+> -  Please also have a look at:
+>    -   the [Api Docs](https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html)
+>    -   the corresponding [pip package](https://pypi.org/project/opnsense-helper/)
+>    -   and soon also the Ansible collection. 
 
 ### required variables
 * import the package and define the needed variables for the main class
@@ -98,8 +86,8 @@ helper.save(temp_path)
 #helper.remove_items()
 ```
 ### scripts and commands
-> - you can run every script from `/usr/local/opnsense/scripts/`
-> - you can use every `pluginctl` and `configctl` command
+> - you can run every script fron `/usr/local/opnsense/scripts/`
+> - you can use every `pluginctl` and `configctl` commands
 > - use `<command: str> <argument:str> <flags:arr>`
 > - besides command, argument may be required based on the method
 #### Example

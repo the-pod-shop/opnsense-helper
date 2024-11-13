@@ -13,15 +13,17 @@
 __pycache__
 *.py[cod]
 *$py.class
+*opnsense_helper.egg-info
 
 # Log-Dateien
 *.log
-
+config.xml
 # Temporäre Dateien
 *.tmp
 *.swp
 *.swo
-
+*.dist
+*.build
 # IDE-Spezifische Dateien
 .vscode/
 .idea/

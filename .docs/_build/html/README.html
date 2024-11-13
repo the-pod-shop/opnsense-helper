@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>about opnsense-helper &mdash; opnsense_helper 0.1.20 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=17aaaefc"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Opnsense-Helper" href="python_package.html" />
+    <link rel="prev" title="Opnsense-Helper" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            opnsense_helper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">about opnsense-helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#install">install</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pip">pip</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#usage">usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#required-variables">required variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#config-manager">config_manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-the-module-objects">create the module objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assign-the-config">assign the config</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#scripts-and-commands">scripts and commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#result">Result</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frontend-api">Frontend Api</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#config-manager-manual-usage">config_manager manual usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contribute">contribute</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#motivation">motivation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API-Dokumentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html">Opnsense-Helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#commands">commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#scripts">scripts</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">opnsense_helper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">about opnsense-helper</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="about-opnsense-helper">
+<h1>about opnsense-helper<a class="headerlink" href="#about-opnsense-helper" title="Link to this heading"></a></h1>
+<table>
+    <tr>
+       <td>
+          <a href="https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html"> 
+<img alt="Static Badge" src="https://img.shields.io/badge/Api%20Docs-%F0%9F%93%96%20-grey?style=for-the-badge&color=lightblue">        </td>
+        <td>
+            <a href="https://pypi.org/project/opnsense-helper/">
+            <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/opnsense-helper?style=for-the-badge&link=https%3A%2F%2Fpypi.org%2Fproject%2Fopnsense-helper%2F">
+            </a>
+        </td>
+        <td>
+        <img alt="Static Badge" src="https://img.shields.io/badge/Ansible%20Collection-%F0%9F%9A%A7-darkgrey?style=for-the-badge&color=red">
+        </td>
+    </tr>
+</table>
+<ul class="simple">
+<li><p>create, assign and enable lan / phy interfaces and all the other stuff that is <em><strong>Not enabled</strong></em> in the opnsense api</p></li>
+<li><p>use the config_manager to apply all your configs in runtime at once</p></li>
+<li><p>uses the opnsense backend via shh</p></li>
+<li><p>configctl and pluginctl commands</p></li>
+<li><p>around 80 opnsense scripts you can call</p></li>
+<li><p>automatically configures your Vlan and Phy Interfaces after applying configuration</p></li>
+</ul>
+</section>
+<section id="install">
+<h1>install<a class="headerlink" href="#install" title="Link to this heading"></a></h1>
+<section id="pip">
+<h2>pip<a class="headerlink" href="#pip" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>opnsense-helper
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h1>usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
+<blockquote>
+<div><ul class="simple">
+<li><p>you can run the provided snippets directly by pulling the <a class="reference external" href="https://github.com/the-pod-shop/opnsense-helper/blob/main/python/examples/add_vlans.py">example file</a></p></li>
+<li><p>Please also have a look at:</p>
+<ul>
+<li><p>the <a class="reference external" href="https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html">Api Docs</a></p></li>
+<li><p>the corresponding <a class="reference external" href="https://pypi.org/project/opnsense-helper/">pip package</a></p></li>
+<li><p>and soon also the Ansible collection.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<section id="required-variables">
+<h2>required variables<a class="headerlink" href="#required-variables" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>import the package and define the needed variables for the main class</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opnsense_helper.opnsense_helper</span> <span class="kn">import</span> <span class="n">Opnsense_Helper</span>
+<span class="kn">from</span> <span class="nn">opnsense_helper.config_manager.config_manager</span> <span class="kn">import</span> <span class="n">Vlan</span><span class="p">,</span> <span class="n">Dhcpd</span><span class="p">,</span> <span class="n">Interface</span>
+
+<span class="n">host</span><span class="o">=</span> <span class="s2">&quot;192.168.1.103&quot;</span>
+<span class="n">auth</span><span class="o">=</span><span class="p">{</span>
+<span class="s2">&quot;user&quot;</span><span class="p">:</span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="s2">&quot;passw&quot;</span><span class="p">:</span><span class="s2">&quot;opnsense&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">temp_path</span><span class="o">=</span><span class="s2">&quot;./config.xml&quot;</span>
+<span class="n">helper</span><span class="o">=</span><span class="n">Opnsense_Helper</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span><span class="n">ssh_auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span><span class="n">temp_path</span><span class="o">=</span><span class="n">temp_path</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="config-manager">
+<h2>config_manager<a class="headerlink" href="#config-manager" title="Link to this heading"></a></h2>
+<section id="create-the-module-objects">
+<h3>create the module objects<a class="headerlink" href="#create-the-module-objects" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>add  or change existing modules</p>
+<ul class="simple">
+<li><p>currently supports vlans, dhcpd, interfaces and soon routes, as well as firewall rules</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>create the objects of the modules you want to set</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vlans</span><span class="o">=</span><span class="p">[</span>
+<span class="n">Vlan</span><span class="p">(</span><span class="s2">&quot;vlan1&quot;</span><span class="p">,</span><span class="s2">&quot;vtnet1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">),</span>
+<span class="n">Vlan</span><span class="p">(</span><span class="s2">&quot;vlan2&quot;</span><span class="p">,</span><span class="s2">&quot;vtnet1&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">),</span>
+<span class="n">Vlan</span><span class="p">(</span><span class="s2">&quot;vlan3&quot;</span><span class="p">,</span><span class="s2">&quot;vtnet1&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">interfaces</span><span class="o">=</span><span class="p">[</span>
+<span class="n">Interface</span><span class="p">(</span><span class="s2">&quot;opt1&quot;</span><span class="p">,</span><span class="s2">&quot;router&quot;</span><span class="p">,</span><span class="s2">&quot;vtnet1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;200.1.0.1&quot;</span><span class="p">,</span><span class="s2">&quot;24&quot;</span><span class="p">),</span>
+<span class="n">Interface</span><span class="p">(</span><span class="s2">&quot;opt2&quot;</span><span class="p">,</span><span class="s2">&quot;vlan1&quot;</span><span class="p">,</span><span class="s2">&quot;vlan0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s1">&#39;200.0.1.1&#39;</span><span class="p">,</span> <span class="s2">&quot;24&quot;</span><span class="p">,</span> <span class="s1">&#39;00:00:00:01:00:01&#39;</span><span class="p">),</span>
+<span class="n">Interface</span><span class="p">(</span><span class="s2">&quot;opt3&quot;</span><span class="p">,</span><span class="s2">&quot;vlan2&quot;</span><span class="p">,</span><span class="s2">&quot;vlan0.2&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s1">&#39;200.0.2.1&#39;</span><span class="p">,</span> <span class="s2">&quot;24&quot;</span><span class="p">,</span> <span class="s1">&#39;00:00:00:01:00:02&#39;</span><span class="p">),</span>
+<span class="n">Interface</span><span class="p">(</span><span class="s2">&quot;opt4&quot;</span><span class="p">,</span><span class="s2">&quot;vlan3&quot;</span><span class="p">,</span><span class="s2">&quot;vlan0.3&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s1">&#39;200.0.3.1&#39;</span><span class="p">,</span> <span class="s2">&quot;24&quot;</span><span class="p">,</span> <span class="s1">&#39;00:00:00:01:00:03&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">dhcp</span><span class="o">=</span><span class="p">[</span>
+<span class="n">Dhcpd</span><span class="p">(</span><span class="s2">&quot;opt1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,{</span><span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="s1">&#39;200.1.0.2&#39;</span><span class="p">,</span> <span class="s1">&#39;_to&#39;</span><span class="p">:</span> <span class="s1">&#39;200.1.0.2&#39;</span><span class="p">}),</span>
+<span class="n">Dhcpd</span><span class="p">(</span><span class="s2">&quot;opt2&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,{</span><span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="s1">&#39;200.0.1.1&#39;</span><span class="p">,</span> <span class="s1">&#39;_to&#39;</span><span class="p">:</span> <span class="s1">&#39;200.0.1.100&#39;</span><span class="p">}),</span>
+<span class="n">Dhcpd</span><span class="p">(</span><span class="s2">&quot;opt3&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,{</span><span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="s1">&#39;200.0.2.1&#39;</span><span class="p">,</span> <span class="s1">&#39;_to&#39;</span><span class="p">:</span> <span class="s1">&#39;200.0.2.100&#39;</span><span class="p">}),</span>
+<span class="n">Dhcpd</span><span class="p">(</span><span class="s2">&quot;opt4&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,{</span><span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="s1">&#39;200.0.3.1&#39;</span><span class="p">,</span> <span class="s1">&#39;_to&#39;</span><span class="p">:</span> <span class="s1">&#39;200.0.3.100&#39;</span><span class="p">}),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="assign-the-config">
+<h3>assign the config<a class="headerlink" href="#assign-the-config" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">helper</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;interfaces&quot;</span><span class="p">,</span><span class="n">interfaces</span><span class="p">)</span>
+<span class="n">helper</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;dhcpd&quot;</span><span class="p">,</span><span class="n">dhcp</span><span class="p">)</span>
+<span class="n">helper</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;vlans&quot;</span><span class="p">,</span><span class="n">vlans</span><span class="p">)</span>
+<span class="n">helper</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+<span class="c1">#helper.remove_items()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="scripts-and-commands">
+<h2>scripts and commands<a class="headerlink" href="#scripts-and-commands" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>you can run every script fron <code class="docutils literal notranslate"><span class="pre">/usr/local/opnsense/scripts/</span></code></p></li>
+<li><p>you can use every <code class="docutils literal notranslate"><span class="pre">pluginctl</span></code> and <code class="docutils literal notranslate"><span class="pre">configctl</span></code> commands</p></li>
+<li><p>use <code class="docutils literal notranslate"><span class="pre">&lt;command:</span> <span class="pre">str&gt;</span> <span class="pre">&lt;argument:str&gt;</span> <span class="pre">&lt;flags:arr&gt;</span></code></p></li>
+<li><p>besides command, argument may be required based on the method</p></li>
+</ul>
+</div></blockquote>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">helper</span><span class="o">.</span><span class="n">scripts</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span>
+    <span class="n">helper</span><span class="o">.</span><span class="n">scripts</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;show_routes&quot;</span><span class="p">)</span>
+
+    <span class="n">helper</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">pluginctl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;ipv4&quot;</span><span class="p">)</span>
+    <span class="n">helper</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">pluginctl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;service&quot;</span><span class="p">,</span> <span class="s2">&quot;dhcpd status&quot;</span><span class="p">)</span>
+    <span class="n">helper</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">pluginctl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;dhcp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="result">
+<h4>Result<a class="headerlink" href="#result" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>/usr/local/opnsense/scripts/system/status.php*<span class="w">  </span>
+<span class="o">{</span><span class="s2">&quot;CrashReporter&quot;</span>:<span class="o">{</span><span class="s2">&quot;statusCode&quot;</span>:2,<span class="s2">&quot;message&quot;</span>:<span class="s2">&quot;No problems were detected.&quot;</span>,<span class="s2">&quot;logLocation&quot;</span>:<span class="s2">&quot;\/crash_reporter.php&quot;</span>,<span class="s2">&quot;timestamp&quot;</span>:<span class="s2">&quot;0&quot;</span><span class="o">}</span>,<span class="s2">&quot;Firewall&quot;</span>:<span class="o">{</span><span class="s2">&quot;statusCode&quot;</span>:-1,<span class="s2">&quot;message&quot;</span>:<span class="s2">&quot;There were error(s) loading the rules: \/tmp\/rules.debug:25: syntax error - The line in question reads [25]: set loginterface \n&quot;</span>,<span class="s2">&quot;logLocation&quot;</span>:<span class="s2">&quot;\/ui\/diagnostics\/log\/core\/firewall&quot;</span>,<span class="s2">&quot;timestamp&quot;</span>:1731025409<span class="o">}}</span>
+
+$<span class="w"> </span>/usr/local/opnsense/scripts/routes/show_routes.py*<span class="w">  </span>
+destination<span class="w">             </span>gateway<span class="w">         </span>flags<span class="w">           </span>nhop#<span class="w">           </span>mtu<span class="w">             </span>netif<span class="w">           </span>expire
+ipv4<span class="w">    </span>default<span class="w"> </span><span class="m">192</span>.168.0.1<span class="w">     </span>UGS<span class="w">     </span><span class="m">5</span><span class="w">       </span><span class="m">1500</span><span class="w">    </span>vtnet0
+ipv4<span class="w">    </span>localhost<span class="w">       </span>link#4<span class="w">  </span>UH<span class="w">      </span><span class="m">2</span><span class="w">       </span><span class="m">16384</span><span class="w">   </span>lo0
+ipv4<span class="w">    </span><span class="m">192</span>.168.0.1<span class="w">     </span>link#1<span class="w">  </span>UHS<span class="w">     </span><span class="m">4</span><span class="w">       </span><span class="m">1500</span><span class="w">    </span>vtnet0
+ipv4<span class="w">    </span><span class="m">192</span>.168.1.0/24<span class="w">  </span>link#1<span class="w">  </span>U<span class="w">       </span><span class="m">1</span><span class="w">       </span><span class="m">1500</span><span class="w">    </span>vtnet0
+ipv4<span class="w">    </span><span class="m">192</span>.168.1.1<span class="w">     </span>link#1<span class="w">  </span>UHS<span class="w">     </span><span class="m">4</span><span class="w">       </span><span class="m">1500</span><span class="w">    </span>vtnet0
+ipv4<span class="w">    </span><span class="m">192</span>.168.1.103<span class="w">   </span>link#1<span class="w">  </span>UHS<span class="w">     </span><span class="m">3</span><span class="w">       </span><span class="m">16384</span><span class="w">   </span>lo0
+ipv4<span class="w">    </span><span class="m">200</span>.1.0.0/24<span class="w">    </span>link#2<span class="w">  </span>U<span class="w">       </span><span class="m">6</span><span class="w">       </span><span class="m">1500</span><span class="w">    </span>vtnet1
+ipv4<span class="w">    </span><span class="m">200</span>.1.0.1<span class="w">       </span>link#2<span class="w">  </span>UHS<span class="w">     </span><span class="m">7</span><span class="w">       </span><span class="m">16384</span><span class="w">   </span>lo0
+ipv6<span class="w">    </span>localhost<span class="w">       </span>link#4<span class="w">  </span>UHS<span class="w">     </span><span class="m">1</span><span class="w">       </span><span class="m">16384</span><span class="w">   </span>lo0
+ipv6<span class="w">    </span>fe80::%lo0/64<span class="w">   </span>link#4<span class="w">  </span>U<span class="w">       </span><span class="m">3</span><span class="w">       </span><span class="m">16384</span><span class="w">   </span>lo0
+ipv6<span class="w">    </span>fe80::1%lo0<span class="w">     </span>link#4<span class="w">  </span>UHS<span class="w">     </span><span class="m">2</span><span class="w">       </span><span class="m">16384</span><span class="w">   </span>lo0
+
+$<span class="w"> </span>pluginctl<span class="w"> </span>-4<span class="w">  </span>
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;address&quot;</span>:<span class="w"> </span>null,
+<span class="w">    </span><span class="s2">&quot;network&quot;</span>:<span class="w"> </span>null,
+<span class="w">    </span><span class="s2">&quot;bits&quot;</span>:<span class="w"> </span>null,
+<span class="w">    </span><span class="s2">&quot;device&quot;</span>:<span class="w"> </span>null,
+<span class="w">    </span><span class="s2">&quot;interface&quot;</span>:<span class="w"> </span>null
+<span class="o">}</span>
+
+$<span class="w"> </span>pluginctl<span class="w"> </span>-s<span class="w"> </span>dhcpd<span class="w"> </span>status<span class="w"> </span>
+dhcpd<span class="w"> </span>is<span class="w"> </span>running<span class="w"> </span>as<span class="w"> </span>pid<span class="w"> </span><span class="m">16072</span>.
+
+$<span class="w"> </span>pluginctl<span class="w"> </span>-c<span class="w"> </span>dhcp<span class="w"> </span>
+Starting<span class="w"> </span>DHCPv4<span class="w"> </span>service...done.
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="frontend-api">
+<h2>Frontend Api<a class="headerlink" href="#frontend-api" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>you can download the config.xml and add vlans via api</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">using_api</span><span class="p">():</span>
+    <span class="n">vlans_api</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="s1">&#39;vtnet1&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;pcp&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;proto&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;descr&#39;</span><span class="p">:</span> <span class="s1">&#39;vlan1&#39;</span><span class="p">,</span> <span class="s1">&#39;vlanif&#39;</span><span class="p">:</span> <span class="s1">&#39;vlan0.1&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="s1">&#39;vtnet1&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;pcp&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;proto&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;descr&#39;</span><span class="p">:</span> <span class="s1">&#39;vlan2&#39;</span><span class="p">,</span> <span class="s1">&#39;vlanif&#39;</span><span class="p">:</span> <span class="s1">&#39;vlan0.2&#39;</span><span class="p">}</span>
+    <span class="p">]</span>
+    <span class="n">api_auth</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">&quot;api_key&quot;</span> <span class="p">:</span><span class="s1">&#39;ejl4fIU9yfNk+gaQmPk/rqIa15f1yX1snIKgcIEl2QNoJwhbekraWIE0ANRYceh9hey5IFGzlf3da4yJ&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;api_secret&quot;</span><span class="p">:</span><span class="s1">&#39;5JVVGoatPbaAA+FozLDQY92/T6sRlmKD1+aRNl/YI8KA9/0TNiTDboLveqvd9FU8wFeDo3D3DY5wrUtF&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;ssl&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;verify&quot;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="p">}</span>    
+    <span class="n">helper</span><span class="o">=</span><span class="n">Opnsense_Helper</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span><span class="n">api_auth</span><span class="o">=</span><span class="n">api_auth</span><span class="p">,</span><span class="n">filepath</span><span class="o">=</span><span class="n">output</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">helper</span><span class="o">.</span><span class="n">vlans_api</span><span class="p">(</span><span class="n">vlans_api</span><span class="p">,</span><span class="s2">&quot;add&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="config-manager-manual-usage">
+<h3>config_manager manual usage<a class="headerlink" href="#config-manager-manual-usage" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>pull the config.xml from the firewall via ssh</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">helper</span><span class="o">.</span><span class="n">config_manager</span><span class="o">.</span><span class="n">get_conf</span><span class="p">(</span><span class="n">conf_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>initialize the the Opnsense_Helper-class and parse the config.xml</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">helper</span><span class="o">.</span><span class="n">config_manager</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>add the items</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">helper</span><span class="o">.</span><span class="n">config_manager</span><span class="o">.</span><span class="n">add_Items</span><span class="p">(</span><span class="s2">&quot;vlans&quot;</span><span class="p">,</span><span class="n">vlans</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>save the configuration as xml and copy it back to the firewall</p></li>
+</ul>
+<blockquote>
+<div><p>this will also reconfigure your vlans for you, if you have any</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">helper</span><span class="o">.</span><span class="n">config_manager</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="n">helper</span><span class="o">.</span><span class="n">config_manager</span><span class="o">.</span><span class="n">put_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="n">conf_path</span><span class="p">)</span>
+<span class="n">helper</span><span class="o">.</span><span class="n">config_manager</span><span class="o">.</span><span class="n">close_con</span><span class="p">()</span>   
+</pre></div>
+</div>
+</section>
+</section>
+<section id="contribute">
+<h2>contribute<a class="headerlink" href="#contribute" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>clone, or fork <code class="docutils literal notranslate"><span class="pre">git&#64;github.com:the-pod-shop/opnsense-helper.git</span></code></p></li>
+<li><p>build when made changes</p></li>
+<li><p>make sure to use the right user</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>python
+python<span class="w"> </span>setup.py<span class="w"> </span>bdist_wheel<span class="w"> </span><span class="se">\</span>
+<span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="o">&amp;&amp;</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>build<span class="w"> </span><span class="c1">#--force </span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>you can also use the build.sh script</p></li>
+<li><p>create pull request</p></li>
+</ul>
+</section>
+</section>
+<section id="motivation">
+<h1>motivation<a class="headerlink" href="#motivation" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>i couldnt find a single repo/collection/terraform provider/api that let me assign and enable lan interfaces</p></li>
+<li><p>i decided to create one mself</p></li>
+<li><p>opnsense api does not let me do it, it just replies with: controller not found</p></li>
+<li><p>but /conf/config.xml has the answer.</p></li>
+<li><p>however for phisical interfaces its the god damn conf.rc</p></li>
+<li><p>my opnsense runs in a vm, so it really doesnt matter for me</p></li>
+<li><p>i just add the interfaces via libvirt and all i need to do is to enable them, given the /conf/config.xml method
+xml has the answer.</p></li>
+<li><p>however for phisical interfaces its the god damn conf.rc</p></li>
+<li><p>my opnsense runs in a vm, so it really doesnt matter for me</p></li>
+<li><p>i just add the interfaces via libvirt and all i need to do is to enable them, given the /conf/config.xml method</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Opnsense-Helper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="python_package.html" class="btn btn-neutral float-right" title="Opnsense-Helper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ji-podhead.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
