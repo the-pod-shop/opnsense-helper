@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to my-sphinx-test’s documentation! &mdash; opnsense_helper 0.1.20 documentation</title>
+  <title>Opnsense-Helper &mdash; opnsense_helper 0.1.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="opnsense_helper" href="opnsense_helper/opnsense_helper.html" /> 
+    <link rel="next" title="about opnsense-helper" href="README.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,8 +41,18 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="opnsense_helper/opnsense_helper.html">opnsense_helper</a></li>
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">about opnsense-helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#install">install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#usage">usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#motivation">motivation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API-Dokumentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html">Opnsense-Helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#commands">commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#scripts">scripts</a></li>
 </ul>
 
         </div>
@@ -59,7 +69,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to my-sphinx-test’s documentation!</li>
+      <li class="breadcrumb-item active">Opnsense-Helper</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -69,24 +79,82 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-my-sphinx-test-s-documentation">
-<h1>Welcome to my-sphinx-test’s documentation!<a class="headerlink" href="#welcome-to-my-sphinx-test-s-documentation" title="Link to this heading"></a></h1>
+  <section id="opnsense-helper">
+<h1>Opnsense-Helper<a class="headerlink" href="#opnsense-helper" title="Link to this heading"></a></h1>
+<p><strong>The backend framework for opnsense</strong></p>
+<ul class="simple">
+<li><p>create, assign and enable lan / phy interfaces and all the other stuff that is <strong>*Not enabled*</strong> in the opnsense api</p></li>
+<li><p>use the config_manager to apply all your configs in runtime at once</p></li>
+<li><p>uses the opnsense backend via shh</p></li>
+<li><p>configctl and pluginctl commands</p></li>
+<li><p>around 80 opnsense scripts you can call</p></li>
+<li><p>automatically configures your Vlan and Phy Interfaces after applying configuration</p></li>
+</ul>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">about opnsense-helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#install">install</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#pip">pip</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#usage">usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#required-variables">required variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#config-manager">config_manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#scripts-and-commands">scripts and commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#frontend-api">Frontend Api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#contribute">contribute</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#motivation">motivation</a></li>
+</ul>
 </div>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="opnsense_helper/opnsense_helper.html#module-opnsense_helper" title="opnsense_helper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">opnsense_helper</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Python API-Dokumentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html">Opnsense-Helper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.opnsense_helper.Opnsense_Helper"><code class="docutils literal notranslate"><span class="pre">Opnsense_Helper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#commands">commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.commands.commands.Commands"><code class="docutils literal notranslate"><span class="pre">Commands</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.commands.commands.configctl"><code class="docutils literal notranslate"><span class="pre">configctl</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.commands.commands.pluginctl"><code class="docutils literal notranslate"><span class="pre">pluginctl</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.commands.commands.reconfigure"><code class="docutils literal notranslate"><span class="pre">reconfigure</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#scripts">scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.Scripts"><code class="docutils literal notranslate"><span class="pre">Scripts</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.Wireguard"><code class="docutils literal notranslate"><span class="pre">Wireguard</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.auth"><code class="docutils literal notranslate"><span class="pre">auth</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.dhcp"><code class="docutils literal notranslate"><span class="pre">dhcp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.dns"><code class="docutils literal notranslate"><span class="pre">dns</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.filter"><code class="docutils literal notranslate"><span class="pre">filter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.firmware"><code class="docutils literal notranslate"><span class="pre">firmware</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.health"><code class="docutils literal notranslate"><span class="pre">health</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.interfaces"><code class="docutils literal notranslate"><span class="pre">interfaces</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.ipsec"><code class="docutils literal notranslate"><span class="pre">ipsec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.netflow"><code class="docutils literal notranslate"><span class="pre">netflow</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.openssh"><code class="docutils literal notranslate"><span class="pre">openssh</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.openvpn"><code class="docutils literal notranslate"><span class="pre">openvpn</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.routes"><code class="docutils literal notranslate"><span class="pre">routes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.shaper"><code class="docutils literal notranslate"><span class="pre">shaper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.shell"><code class="docutils literal notranslate"><span class="pre">shell</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.suricata"><code class="docutils literal notranslate"><span class="pre">suricata</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.syslog"><code class="docutils literal notranslate"><span class="pre">syslog</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.system"><code class="docutils literal notranslate"><span class="pre">system</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_package.html#opnsense_helper.scripts.scripts.unbound"><code class="docutils literal notranslate"><span class="pre">unbound</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="opnsense_helper/opnsense_helper.html" class="btn btn-neutral float-right" title="opnsense_helper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="README.html" class="btn btn-neutral float-right" title="about opnsense-helper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

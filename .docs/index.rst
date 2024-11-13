@@ -1,21 +1,30 @@
-.. my-sphinx-test documentation master file, created by
-   sphinx-quickstart on Sun Jan 14 17:51:39 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-Welcome to my-sphinx-test's documentation!
+Opnsense-Helper
 ==========================================
+
+**The backend framework for opnsense**
+
+* create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
+
+* use the config_manager to apply all your configs in runtime at once
+
+* uses the opnsense backend via shh 
+
+* configctl and pluginctl commands
+
+* around 80 opnsense scripts you can call
+
+* automatically configures your Vlan and Phy Interfaces after applying configuration
+
+
 .. toctree::
-   :maxdepth: 20
-   :caption: Contents: opnsense_helper
+   :maxdepth: 2
+   :caption: About:
+   
+   README.md
 
 
-.. autosummary::
-   :toctree: opnsense_helper
-   :recursive:
-
-   opnsense_helper
-
-.. automodule:: opnsense_helper.scripts.scripts
-     :members:
-
-   .. automethod:: __init__
+.. toctree::
+   :maxdepth: 2
+   :caption: Python API-Dokumentation
+   
+   python_package.rst

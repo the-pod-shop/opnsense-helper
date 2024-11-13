@@ -1,12 +1,53 @@
 from opnsense_helper.utils.exec_class import Exec_Class
 class Commands():
-     def __init__(self,base):
-          
-          self.reconfigure=reconfigure(base)
-          self.configctl=configctl(base)
-          self.pluginctl=pluginctl(base)
+    """
+    Class Commands
+    --------------
+
+    Initialize the Commands class.
+    * its just a wrapper for the pluginctl, configctl and reconfigure classes.
+
+    **Parameters**
+
+    base : Base_Class 
+        * The parent object containing the needed ssh connection and the temp path to the config.xml.
+
+    **Returns**
+
+    * None
+    """
+    def __init__(self,base):
+
+        self.reconfigure=reconfigure(base)
+        self.configctl=configctl(base)
+        self.pluginctl=pluginctl(base)
 class reconfigure(Exec_Class):
+    """
+    Class reconfigure
+    ----------------
+    
+    * Initialize the reconfigure class.
+    * Inherits from the Exec_Class class.
+    
+    **Usage**
+    .. code-block:: python
+        Commands.reconfigure.run(<command>,<argument>,<flags>)
+
+    **Parameters**
+    base : Base_Class instance
+        The parent object containing necessary SSH connection details and
+        configuration settings. If provided, its attributes will be copied
+        to this instance.
+
+    **Attributes**
+    commands : dict
+        A dictionary of command configurations with keys for 'vlans' and 'interfaces',
+        each containing command details such as the command string, arguments, 
+        and flags.
+    
+    """
     def __init__(self, base):
+
         print(base.__dict__)
         super(Exec_Class).__init__()
         if base is not None:

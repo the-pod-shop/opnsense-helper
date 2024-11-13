@@ -14,8 +14,7 @@
         </td>
     </tr>
 </table>
-
-***The backend framework for opnsense***
+                
 - create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
 - use the config_manager to apply all your configs in runtime at once
 - uses the opnsense backend via shh 
@@ -87,8 +86,8 @@ helper.save(temp_path)
 #helper.remove_items()
 ```
 ### scripts and commands
-> - you can run every script from `/usr/local/opnsense/scripts/`
-> - you can use every `pluginctl` and `configctl` command
+> - you can run every script fron `/usr/local/opnsense/scripts/`
+> - you can use every `pluginctl` and `configctl` commands
 > - use `<command: str> <argument:str> <flags:arr>`
 > - besides command, argument may be required based on the method
 #### Example
