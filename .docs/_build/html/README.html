@@ -75,6 +75,7 @@
 <p class="caption" role="heading"><span class="caption-text">Python API-Dokumentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="python_package.html">Opnsense-Helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#coonfig-manager">coonfig_manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_package.html#commands">commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_package.html#scripts">scripts</a></li>
 </ul>
@@ -118,8 +119,14 @@
         <td>
         <img alt="Static Badge" src="https://img.shields.io/badge/Ansible%20Collection-%F0%9F%9A%A7-darkgrey?style=for-the-badge&color=red">
         </td>
+    <td>
+    <a href="https://github.com/ji-podhead/opnsense-helper/">
+             <img alt="Static Badge" src="https://img.shields.io/badge/open%20source-blue?style=for-the-badge&logo=github">
+            </a>
+        </td>
     </tr>
 </table>
+<p><em><strong>The backend api for opnsense</strong></em></p>
 <ul class="simple">
 <li><p>create, assign and enable lan / phy interfaces and all the other stuff that is <em><strong>Not enabled</strong></em> in the opnsense api</p></li>
 <li><p>use the config_manager to apply all your configs in runtime at once</p></li>
@@ -128,6 +135,12 @@
 <li><p>around 80 opnsense scripts you can call</p></li>
 <li><p>automatically configures your Vlan and Phy Interfaces after applying configuration</p></li>
 </ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><em><strong><a class="reference external" href="https://pypi.org/project/opnsense-helper">pypy project</a></strong></em></p></li>
+<li><p><em><strong><a class="reference external" href="https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html">Api Docs</a></strong></em></p></li>
+</ul>
+<hr class="docutils" />
 </section>
 <section id="install">
 <h1>install<a class="headerlink" href="#install" title="Link to this heading"></a></h1>
@@ -143,13 +156,6 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>you can run the provided snippets directly by pulling the <a class="reference external" href="https://github.com/the-pod-shop/opnsense-helper/blob/main/python/examples/add_vlans.py">example file</a></p></li>
-<li><p>Please also have a look at:</p>
-<ul>
-<li><p>the <a class="reference external" href="https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html">Api Docs</a></p></li>
-<li><p>the corresponding <a class="reference external" href="https://pypi.org/project/opnsense-helper/">pip package</a></p></li>
-<li><p>and soon also the Ansible collection.</p></li>
-</ul>
-</li>
 </ul>
 </div></blockquote>
 <section id="required-variables">
@@ -220,8 +226,8 @@
 <h2>scripts and commands<a class="headerlink" href="#scripts-and-commands" title="Link to this heading"></a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>you can run every script fron <code class="docutils literal notranslate"><span class="pre">/usr/local/opnsense/scripts/</span></code></p></li>
-<li><p>you can use every <code class="docutils literal notranslate"><span class="pre">pluginctl</span></code> and <code class="docutils literal notranslate"><span class="pre">configctl</span></code> commands</p></li>
+<li><p>you can run every script from <code class="docutils literal notranslate"><span class="pre">/usr/local/opnsense/scripts/</span></code></p></li>
+<li><p>you can use every <code class="docutils literal notranslate"><span class="pre">pluginctl</span></code> and <code class="docutils literal notranslate"><span class="pre">configctl</span></code> command</p></li>
 <li><p>use <code class="docutils literal notranslate"><span class="pre">&lt;command:</span> <span class="pre">str&gt;</span> <span class="pre">&lt;argument:str&gt;</span> <span class="pre">&lt;flags:arr&gt;</span></code></p></li>
 <li><p>besides command, argument may be required based on the method</p></li>
 </ul>
@@ -357,9 +363,6 @@ python<span class="w"> </span>setup.py<span class="w"> </span>bdist_wheel<span c
 <li><p>my opnsense runs in a vm, so it really doesnt matter for me</p></li>
 <li><p>i just add the interfaces via libvirt and all i need to do is to enable them, given the /conf/config.xml method
 xml has the answer.</p></li>
-<li><p>however for phisical interfaces its the god damn conf.rc</p></li>
-<li><p>my opnsense runs in a vm, so it really doesnt matter for me</p></li>
-<li><p>i just add the interfaces via libvirt and all i need to do is to enable them, given the /conf/config.xml method</p></li>
 </ul>
 </section>
 

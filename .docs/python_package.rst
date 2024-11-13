@@ -9,7 +9,15 @@ Api Docs for Opnsense_Helper pip package.
     :undoc-members:
     :show-inheritance:
     
+coonfig_manager
+==========================================
+Config_Manager class lets you assign configurations, by passing arrays of the corresponding Instances.
+Config_Manager will  parse those objects to xml and automatically reconfigure your devices.
 
+.. automodule:: opnsense_helper.config_manager.config_manager
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 commands
 ==========================================

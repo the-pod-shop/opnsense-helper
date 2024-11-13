@@ -1,8 +1,16 @@
 from opnsense_helper.utils.exec_class import Exec_Class
 class Commands():
     """
-    Class Commands
+    
+    class Commands
     --------------
+    
+    **Usage**
+
+          .. code-block:: python
+
+               from opnsense_helper.opnsense_helper import Onsense_Helper
+               Onsense_Helper.commands.<attribute>.run(<command>,<argument>,<flags>)
 
     Initialize the Commands class.
     * its just a wrapper for the pluginctl, configctl and reconfigure classes.
@@ -23,27 +31,37 @@ class Commands():
         self.pluginctl=pluginctl(base)
 class reconfigure(Exec_Class):
     """
-    Class reconfigure
+
+    class reconfigure
     ----------------
     
     * Initialize the reconfigure class.
     * Inherits from the Exec_Class class.
     
     **Usage**
-    .. code-block:: python
-        Commands.reconfigure.run(<command>,<argument>,<flags>)
+
+          .. code-block:: python
+                
+                from opnsense_helper.opnsense_helper import Onsense_Helper
+                Commands.reconfigure.run(<command>,<argument>,<flags>)
+
 
     **Parameters**
+
     base : Base_Class instance
         The parent object containing necessary SSH connection details and
         configuration settings. If provided, its attributes will be copied
         to this instance.
 
     **Attributes**
-    commands : dict
-        A dictionary of command configurations with keys for 'vlans' and 'interfaces',
-        each containing command details such as the command string, arguments, 
-        and flags.
+
+        commands : dict
+            A dictionary of command configurations with keys for 'vlans' and 'interfaces',
+            each containing command details such as the command string, arguments, 
+            and flags.
+            
+            - vlans : Execute reconfigure_vlans.php
+            - interfaces : Execute configctl interface reconfigure
     
     """
     def __init__(self, base):
@@ -59,7 +77,65 @@ class reconfigure(Exec_Class):
 }
 
 class configctl(Exec_Class):
+    """
+
+    class configctl
+    ----------
+
+    * Initialize the configctl class.
+    * Inherits from the Exec_Class class.
+    
+    **Usage**
+
+        .. code-block:: python
+
+            from opnsense_helper.opnsense_helper import Onsense_Helper
+            Commands.configctl.run(<command>,<argument>,<flags>)
+
+    **Parameters**
+
+    base : Base_Class instance
+        The parent object containing necessary SSH connection details and
+        configuration settings. If provided, its attributes will be copied
+        to this instance.
+
+    **Attributes**
+
+    - commands : dict
+        A dictionary of command configurations with keys for configctl options,
+        each containing command details such as the command string, arguments, 
+        and flags.
+    
+        - auth : Execute configctl auth command
+        - captiveportal : Execute configctl captiveportal command
+        - configd : Execute configctl configd command
+        - cron : Execute configctl cron command
+        - dhcpd : Execute configctl dhcpd command
+        - dhcpd6 : Execute configctl dhcpd6 command
+        - dns : Execute configctl dns command
+        - filter : Execute configctl filter command
+        - firmware : Execute configctl firmware command
+        - health : Execute configctl health command
+        - ids : Execute configctl ids command
+        - interface : Execute configctl interface command
+        - ipfw : Execute configctl ipfw command
+        - ipsec : Execute configctl ipsec command
+        - kea : Execute configctl kea command
+        - monit : Execute configctl monit command
+        - netflow : Execute configctl netflow command
+        - openssh : Execute configctl openssh command
+        - openvpn : Execute configctl openvpn command
+        - syslog : Execute configctl syslog command
+        - system : Execute configctl system command
+        - template : Execute configctl template command
+        - unbound : Execute configctl unbound command
+        - webgui : Execute configctl webgui command
+        - wireguard : Execute configctl wireguard command
+        - zfs : Execute configctl zfs command
+    """
     def __init__(self, base):
+
+
         super(Exec_Class).__init__()
         if base is not None:
             self.__dict__.update(base.__dict__)
@@ -100,8 +176,51 @@ class configctl(Exec_Class):
         "wireguard":{"command":"configctl wireguard", "argument":None,"flags":[]},
         "zfs":{"command":"configctl zfs", "argument":None,"flags":[]},
         }
+        
 class pluginctl(Exec_Class):
+    """
+    class pluginctl
+    ---------------
+
+    Initializes the pluginctl class, inheriting from Exec_Class. If a base object 
+    is provided, its attributes are copied to the current instance. This 
+    initializer also sets up a dictionary of command configurations for various 
+    pluginctl operations.
+
+    **Usage**
+
+          .. code-block:: python
+
+                from opnsense_helper.opnsense_helper import Onsense_Helper
+                Commands.pluginctl.run(<command>,<argument>,<flags>)
+
+    **Attributes:**
+
+        commands : dict 
+            A dictionary where each key is a command name and the value is another dictionary containing:
+                - argument : str
+                    The argument to be passed to the command. This is currently always None.
+                - flags : list 
+                    A list of flags for the command. Currently, these are empty.
+                - command : str 
+                    The path to the script associated with the command.
+
+            The commands are as follows:
+                - ipv4: pluginctl -4, returns primary address of interface
+                - config: pluginctl -c, executes plugin [_configure] hook
+                - ifconfig: pluginctl -D, lists available devices
+                - device_info: pluginctl -d, lists registered devices
+                - flush: pluginctl -f, flushes config property (raw, e.g. system.firmware.plugins)
+                - get: pluginctl -g, get config property (raw, e.g. system.firmware.plugins)
+                - info: pluginctl -I, lists registered device statistics
+                - if_reg: pluginctl -i, invokes dynamic interface registration
+                - run: pluginctl -r, runs a command (e.g. myservice restart)
+                - service_dump: pluginctl -S, dumps service metadata
+                - service: pluginctl -s, executes service command (e.g. myservice restart)
+    """
     def __init__(self, base):
+            
+
             super(Exec_Class).__init__()
             if base is not None:
                 self.__dict__.update(base.__dict__)

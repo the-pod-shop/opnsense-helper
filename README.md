@@ -20,7 +20,7 @@
     </tr>
 </table>
 
-***The backend framework for opnsense***
+***The backend api for opnsense***
 
 - create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
 - use the config_manager to apply all your configs in runtime at once
@@ -215,6 +215,3 @@ python setup.py bdist_wheel \
 - my opnsense runs in a vm, so it really doesnt matter for me
 - i just add the interfaces via libvirt and all i need to do is to enable them, given the /conf/config.xml method
 xml has the answer.
-- however for phisical interfaces its the god damn conf.rc
-- my opnsense runs in a vm, so it really doesnt matter for me
-- i just add the interfaces via libvirt and all i need to do is to enable them, given the /conf/config.xml method
