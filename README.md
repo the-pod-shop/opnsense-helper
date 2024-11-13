@@ -2,10 +2,10 @@
 <table>
     <tr>
        <td>
-            <a href="https://pypi.org/project/opnsense-helper/">
+          <a href="https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html"> 
 <img alt="Static Badge" src="https://img.shields.io/badge/Api%20Docs-%F0%9F%93%96%20-grey?style=for-the-badge&color=lightblue">        </td>
         <td>
-            <a href="https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html"> 
+            <a href="https://pypi.org/project/opnsense-helper/">
             <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/opnsense-helper?style=for-the-badge&link=https%3A%2F%2Fpypi.org%2Fproject%2Fopnsense-helper%2F">
             </a>
         </td>
@@ -29,8 +29,11 @@
 pip install opnsense-helper
 ```
 ## usage
-> you can run the provided snippets directly by pulling the [example file](https://github.com/the-pod-shop/opnsense-helper/blob/main/python/examples/add_vlans.py)
-> Please se the [Api Docs](https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html), the corresponding [pip package](https://pypi.org/project/opnsense-helper/) site and soon also the Ansible collection. 
+> -  you can run the provided snippets directly by pulling the [example file](https://github.com/the-pod-shop/opnsense-helper/blob/main/python/examples/add_vlans.py)
+> -  Please also have a look at:
+>    -   the [Api Docs](https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html)
+>    -   the corresponding [pip package](https://pypi.org/project/opnsense-helper/)
+>    -   and soon also the Ansible collection. 
 
 ### required variables
 * import the package and define the needed variables for the main class
