@@ -1,4 +1,7 @@
 # opnsense-helper
+
+| ![Static Badge](https://img.shields.io/badge/Api%20Docs-%F0%9F%93%9A-blue?link=https%3A%2F%2Fji-podhead.github.io%2Fopnsense-helper%2F.docs%2F_build%2Fhtml%2Findex.html) | ![PyPI - Version](https://img.shields.io/pypi/v/opnsense-helper?logo=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fc%2Fc3%2FPython-logo-notext.svg%2F1869px-Python-logo-notext.svg.png&link=https%3A%2F%2Fpypi.org%2Fproject%2Fopnsense-helper%2F) |![Static Badge](https://img.shields.io/badge/Ansible%20Collection-%F0%9F%9A%A7-red) |
+
 - create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
 - use the config_manager to apply all your configs in runtime at once
 - uses the opnsense backend via shh 
