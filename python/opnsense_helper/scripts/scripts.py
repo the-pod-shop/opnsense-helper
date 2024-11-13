@@ -4,7 +4,27 @@ Exec_Class
 scripts_folder="/usr/local/opnsense/scripts/"
 
 class Scripts():
+     """🐕"""
      def __init__(self,base):
+          """
+          A class to represent a person.
+
+          ...
+
+          Attributes
+          ----------
+          name : str
+               first name of the person
+          surname : str
+               family name of the person
+          age : int
+               age of the person
+
+          Methods
+          -------
+          info(additional=""):
+               Prints the person's name and age.
+          """
           self.unbound=unbound(base)
           self.system=system(base)
           self.syslog=syslog(base)
@@ -26,7 +46,31 @@ class Scripts():
           self.Wireguard=Wireguard(base)
 
 class unbound(Exec_Class):
+     """
+     Initializes the unbound class, inheriting from Exec_Class. If a base object 
+     is provided, its attributes are copied to the current instance. This 
+     initializer also sets up a dictionary of command configurations for various 
+     unbound operations.
+
+     Attributes:
+     commands (dict): A dictionary where each key is a command name and the 
+     value is another dictionary containing:
+          - command (str): The path to the script associated with the command.
+          - flags (list): A list of flags for the command. Currently, these 
+          are empty.
+
+     Attributes:
+          - wrapper: Executes 'ubound/wrapper.py'.
+          - stats: Executes 'ubound/stats.py'.
+          - start: Executes 'ubound/start.sh'.
+          - restore_db: Executes 'ubound/restore_db.py'.
+          - logger: Executes 'ubound/logger.py'.
+          - check: Executes 'ubound/check.sh'.
+          - cache: Executes 'ubound/cache.sh'.
+          - blocklists: Executes 'ubound/blocklists.py'.
+     """  
      def __init__(self, base):
+   
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)

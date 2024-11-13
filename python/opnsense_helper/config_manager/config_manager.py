@@ -3,27 +3,35 @@ import xml.etree.ElementTree as ET
 from xmldiff import main, formatting
 from  opnsense_helper.utils.utils import parseChild, update_xml_file
 class Interface:
-    """
-    ***Creates a Interface object.***
-    The ID is the technical identifier. 
-    This is required and you need to find out which "opt" to use, 
-    because rn there is no function that provides that.
-    The interface key in the xml are the identifiers, in this case the class id`s.
-    Im not sure if they have a certain naming convention 
-
-    *Required params(man. usage):*
-    * id: str
-    * interface: str
-    * enable: str
-    * descr: str
-    
-    *Defaults:*
-    * subnet: 32
-    * ipaddr: None
-    * spoofmac: None 
-    
-    """
+    """Creates a Interface object"""
     def __init__(self, id=None, descr =None, interface=None, enable=None, ipaddr=None, subnet="32", spoofmac=None):
+        """Creates a Interface object
+        The ID is the technical identifier. 
+        This is required and you need to find out which "opt" to use, 
+        because rn there is no function that provides that.
+        The interface key in the xml are the identifiers, in this case the class id`s.
+        Im not sure if they have a certain naming convention 
+        
+        Required Args
+        ----------
+        id : str 
+            the technical identifier
+        interface : str 
+            target interface
+        enable : str
+            1, or 0 for disable or disable
+        descr : str
+            description, or name
+
+        Defaults
+        ----------
+        subnet : str
+            CIDR notation, default="32"
+        ipaddr : str 
+            the ipv4 address, default=None
+        spoofmac: str 
+            the spoofed mac, default=None 
+        """
         self.id=id
         self.interface=interface
         self.enable=enable
@@ -34,7 +42,11 @@ class Interface:
         self.descr= descr #if descr is not None else id if id is not None else None
         self.attr={}
     def initialize(self, parent):
-
+        """
+        This method parses the xml parent and updates the class attributes.
+        It is used in the config_manager to initialize the class with the data from the xml.
+        The parent element of the xml tree is passed as an argument.
+        """
         self.descr = parseChild(parent, "descr")
         self.interface = parseChild(parent, "if")
         self.enable = parseChild(parent, "enable")
@@ -43,21 +55,28 @@ class Interface:
         self.type = parseChild(parent, "type")
         self.virtual = parseChild(parent, "virtual")
         self.spoofmac=parseChild(parent, "spoofmac")
-        
-class Vlan:
-    """
-    ***Creates a vlan object.***
 
-    *Required params(man. usage):*
-    * id: str
-    * tag: str
+class Vlan:
+    """Creates a vlan object"""
     
-    *Defaults:*
-    * pcp: 0 
-    * descr: id
-    * vlanif: "vlan0."+tag 
-    """  
     def __init__(self, id=None, parentinterface=None, tag=None,  vlanif= None, pcp= '0', descr=None ):
+        """Creates a vlan object
+        Required Args:
+        ----------
+        id: str
+            the identifier needed for storage, since the technical identifier is always the same ("vlan")
+        tag: str
+            the tag of the vlan
+
+        Defaults:
+        ----------
+        pcp: str
+            the priority code point, default = 0  
+        descr: str 
+            the description, default = $id
+        vlanif: str 
+            the interface, default = "vlan0."+tag  
+        """ 
         self.id=id
         self.parentinterface=parentinterface 
         self.pcp = pcp
@@ -66,6 +85,7 @@ class Vlan:
         self.vlanif= vlanif if vlanif is not None else "vlan0."+str(tag) if tag is not None else None
         self.attr={}
     def initialize(self,parent):
+        """This method parses the xml parent and updates the class attributes."""
         self.parentinterface =parseChild(parent, "if")
         self.tag = parseChild(parent,"tag")
         self.pcp = parseChild(parent,"pcp")
@@ -75,24 +95,32 @@ class Vlan:
         
 
 class Dhcpd:
-    """
-    ***Creates a dhcp object.***
-
-    *Required params(man. usage):*
-    * id: str
-    * enable: str
-    * range: dict{_from:str,_to:str}
-    
-    *Defaults:*
-    * ddnsdomainalgorithm: "hmac-md"
-    """  
+    """Creates a dhcp object"""  
     def __init__(self,id=None,enable=None,range=None,ddnsdomainalgorithm="hmac-md"):
+        """Creates a dhcp object
+        Req params
+        ----------
+
+        id : str
+            the id of the object
+        enable : str
+            "1" or "0"
+        range: dict{_from:str,_to:str}
+            the range of ip addresses
+        
+        Defaults
+        ---------
+
+        ddnsdomainalgorithm : str
+            Domain Generation Algorithm - default = "hmac-md"    
+        """
         self.id=id
         self.enable=enable
         self._range=range
         self.ddnsdomainalgorithm=ddnsdomainalgorithm
         self.attr={}
     def initialize(self, parent):
+        """This method parses the xml parent and updates the class attributes"""
         self.enable = parseChild(parent, "enable")
         self.ddnsdomainalgorithm = parseChild(parent, "ddnsdomainalgorithm")
         self._range={
@@ -103,9 +131,20 @@ class Dhcpd:
             self._range["_from"]=self._range["_from"].text
             self._range["_to"]=self._range["_to"].text
 
+
+
 class Config_Manager():
-        
+    """Creates a Config_Manager object"""    
     def __init__(self,  base, init):
+        """Creates a Config_Manager object
+        Params
+        ------
+        base : Base_Class instance
+            includes the need objects for ssh and stores the objects
+        init : bool
+            if True, the xml will get parsed when the Config_Manager object is created
+        """
+
         super().__init__()
         if base is not None:
             self.__dict__.update(base.__dict__)
@@ -133,7 +172,6 @@ class Config_Manager():
         self.get_all("interfaces")
 
     def save(self,output,put=True):
-        output= output if output is not None else self.temp_path
         """
         Save the current configuration to a file.
 
@@ -149,6 +187,7 @@ class Config_Manager():
         put: bool
             Automatically copies the configuration to the firewall
         """
+        output= output if output is not None else self.temp_path
         if len(self.objects["dhcpd"]) > 0:
             print("saving dhcpd")
             update_xml_file(self.objects["dhcpd"],self.root,"dhcpd")
@@ -254,6 +293,25 @@ class Config_Manager():
             self.put_file()
 
     def get_item(self,type,item):
+        """
+        Retrieve a specific item from the in-memory XML data.
+
+        This method retrieves an item of a specified type from the in-memory XML data, removes its 'attr' attribute,
+        and returns the remaining attributes of the item.
+
+        Parameters
+        ----------
+        type : str
+            The type of the item to retrieve. Can be "dhcpd", "interfaces", or "vlans".
+        item : str
+            The tag of the item to retrieve.
+
+        Returns
+        -------
+        dict
+            A dictionary containing the remaining attributes of the item after removing the 'attr' attribute.
+            If the item is not found, prints a message and returns None.
+        """
         o = self.objects[type][item]
         if o:
             o=o.__dict__.pop("attr")
@@ -317,48 +375,3 @@ class Config_Manager():
 
 
 
-
-
-
-
-
-
-
-# deprecated
-    def get_backup(self,output=None):
-        """
-        this function is currently deprecated
-        it was used to get the config file using the api
-        i left it in however if someone wants to fetch a certain backup 
-        i need to implement the backup selection though
-        """
-        command = 'core/backup/download/this'
-        backup=api_get(self,command)
-        self.root=backup
-        print(ET.tostring(backup, encoding='unicode'))
-        # if output != None:
-        #     path=output
-        # else:
-        #     path = self.temp_path
-        # with open(path, 'w') as f:
-        #     f.write(ET.tostring(backup, encoding='unicode', method='xml'))
-
-
-# deprecated
-    def vlans_api(self,vlans, command="add"):
-        if command == "add":
-            for value in vlans:
-                print("---------add vlan-----------------")
-                print(value)
-                payload={"vlan":value}
-                r=api_post(self,"interfaces/vlan_settings/addItem",payload)
-                print(r)
-                r=api_post(self,"interfaces/vlan_settings/reconfigure",{})
-                print(r)
-        elif command == "set":
-            for value in vlans:
-                    print("---------set vlan-----------------")
-                    payload={"vlan":value}
-                    r=api_post(self,"interfaces/vlan_settings/set",payload)
-                    print(r)
-    

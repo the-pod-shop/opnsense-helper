@@ -2,7 +2,9 @@
 - create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
 - use the config_manager to apply all your configs in runtime at once
 - uses the opnsense backend via shh 
-
+- configctl and pluginctl commands
+- around 80 opnsense scripts you can call
+- automatically configures your Vlan and Phy Interfaces after applying configuration
 
 ## install 
 ## pip
@@ -128,23 +130,7 @@ def using_api():
     helper.vlans_api(vlans_api,"add")
 ```
 
-### Variables
-#### Opnsense_Helper
-| var | type | description |
-| --- | --- | --- | 
-| host| str | ip or hostname |
-| auth | dict {user: str, passw: str} | SSH authentication dictionary |
-| filepath | str | temp path required to copy the updated xml |
-| verbose | bool | debug frontend api calls |
 
-
-
-#### Module Args
-| var | type | elements |
-| --- | --- | --- | 
-| vlans | list[dict] | {id: str, parent: str, tag: int, pcp: str, proto: str } | None, descr: str, vlanif: str} |
-| interfaces | list[dict] |  {id: str, descr: str, enable: int, ipaddr: str, subnet: str, type: str,  virtual: bool,  spoofmac: str, interface: str} |
-| dhcp | list[dict] | {id: str, enable: str, ddnsdomainalgorithm: str, range: {from: str, _to: str}} |
 
 #### config_manager manual usage
 

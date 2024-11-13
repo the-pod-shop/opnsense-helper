@@ -5,7 +5,7 @@
 Welcome to my-sphinx-test's documentation!
 ==========================================
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 20
    :caption: Contents: opnsense_helper
 
 
@@ -14,4 +14,8 @@ Welcome to my-sphinx-test's documentation!
    :recursive:
 
    opnsense_helper
-   opnsense_helper.commands.commands
+
+.. automodule:: opnsense_helper.scripts.scripts
+     :members:
+
+   .. automethod:: __init__
