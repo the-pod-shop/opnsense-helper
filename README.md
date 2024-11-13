@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 ## about opnsense-helper
-=======
-# opnsense-helper
->>>>>>> 756ca87761d52455b6de04d58e247c8f08cf7003
 <table>
     <tr>
        <td>
@@ -18,12 +14,9 @@
         </td>
     </tr>
 </table>
-<<<<<<< HEAD
 
 ***The backend framework for opnsense***
-=======
-                
->>>>>>> 756ca87761d52455b6de04d58e247c8f08cf7003
+
 - create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
 - use the config_manager to apply all your configs in runtime at once
 - uses the opnsense backend via shh 
