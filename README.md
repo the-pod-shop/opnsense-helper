@@ -1,13 +1,27 @@
 # opnsense-helper
-
-| ![Static Badge](https://img.shields.io/badge/Api%20Docs-%F0%9F%93%9A-blue?link=https%3A%2F%2Fji-podhead.github.io%2Fopnsense-helper%2F.docs%2F_build%2Fhtml%2Findex.html) | ![PyPI - Version](https://img.shields.io/pypi/v/opnsense-helper?logo=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fc%2Fc3%2FPython-logo-notext.svg%2F1869px-Python-logo-notext.svg.png&link=https%3A%2F%2Fpypi.org%2Fproject%2Fopnsense-helper%2F) |![Static Badge](https://img.shields.io/badge/Ansible%20Collection-%F0%9F%9A%A7-red) |
-
+<table>
+    <tr>
+       <td>
+            <a href="https://pypi.org/project/opnsense-helper/">
+<img alt="Static Badge" src="https://img.shields.io/badge/Api%20Docs-%F0%9F%93%96%20-grey?style=for-the-badge&color=lightblue">        </td>
+        <td>
+            <a href="https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html"> 
+            <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/opnsense-helper?style=for-the-badge&link=https%3A%2F%2Fpypi.org%2Fproject%2Fopnsense-helper%2F">
+            </a>
+        </td>
+        <td>
+        <img alt="Static Badge" src="https://img.shields.io/badge/Ansible%20Collection-%F0%9F%9A%A7-darkgrey?style=for-the-badge&color=red">
+        </td>
+    </tr>
+</table>
+                
 - create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
 - use the config_manager to apply all your configs in runtime at once
 - uses the opnsense backend via shh 
 - configctl and pluginctl commands
 - around 80 opnsense scripts you can call
 - automatically configures your Vlan and Phy Interfaces after applying configuration
+
 
 ## install 
 ## pip
@@ -16,6 +30,7 @@ pip install opnsense-helper
 ```
 ## usage
 > you can run the provided snippets directly by pulling the [example file](https://github.com/the-pod-shop/opnsense-helper/blob/main/python/examples/add_vlans.py)
+> Please se the [Api Docs](https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html), the corresponding [pip package](https://pypi.org/project/opnsense-helper/) site and soon also the Ansible collection. 
 
 ### required variables
 * import the package and define the needed variables for the main class
