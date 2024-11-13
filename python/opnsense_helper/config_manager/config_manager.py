@@ -3,35 +3,47 @@ import xml.etree.ElementTree as ET
 from xmldiff import main, formatting
 from  opnsense_helper.utils.utils import parseChild, update_xml_file
 class Interface:
-    """Creates a Interface object"""
-    def __init__(self, id=None, descr =None, interface=None, enable=None, ipaddr=None, subnet="32", spoofmac=None):
-        """Creates a Interface object
-        The ID is the technical identifier. 
-        This is required and you need to find out which "opt" to use, 
-        because rn there is no function that provides that.
-        The interface key in the xml are the identifiers, in this case the class id`s.
-        Im not sure if they have a certain naming convention 
-        
-        Required Args
-        ----------
-        id : str 
-            the technical identifier
-        interface : str 
-            target interface
-        enable : str
-            1, or 0 for disable or disable
-        descr : str
-            description, or name
+    """
+    class Interface
+    --------------
 
-        Defaults
-        ----------
-        subnet : str
-            CIDR notation, default="32"
-        ipaddr : str 
-            the ipv4 address, default=None
-        spoofmac: str 
-            the spoofed mac, default=None 
-        """
+    Creates a Interface object
+    The ID is the technical identifier. 
+    This is required and you need to find out which "opt" to use, 
+    because rn there is no function that provides that.
+    The interface key in the xml are the identifiers, in this case the class id`s.
+    Im not sure if they have a certain naming convention 
+    
+    **Usage**
+
+        .. code-block:: python
+        
+        
+            from opnsense_helper.config_manager.config_manager import Interface
+            interface=Interface(id="vlan", descr="vlan", interface="vlan", enable="1", ipaddr="38.0.101.76", subnet="32", spoofmac="00:00:00:00:00:00")
+    
+    **Required Args**
+    
+    - id : str 
+        the technical identifier
+    - interface : str 
+        target interface
+    - enable : str
+        1, or 0 for disable or disable
+    - descr : str
+        description, or name
+
+    **Defaults**
+    
+    - subnet : str
+        CIDR notation, default="32"
+    - ipaddr : str 
+        the ipv4 address, default=None
+    - spoofmac: str 
+        the spoofed mac, default=None 
+    """
+    def __init__(self, id=None, descr =None, interface=None, enable=None, ipaddr=None, subnet="32", spoofmac=None):
+
         self.id=id
         self.interface=interface
         self.enable=enable
@@ -57,26 +69,39 @@ class Interface:
         self.spoofmac=parseChild(parent, "spoofmac")
 
 class Vlan:
-    """Creates a vlan object"""
-    
-    def __init__(self, id=None, parentinterface=None, tag=None,  vlanif= None, pcp= '0', descr=None ):
-        """Creates a vlan object
-        Required Args:
+    """
+        class Vlan
         ----------
-        id: str
+
+        Creates a vlan object
+        **Usage**
+
+          .. code-block:: python
+            
+            
+            from opnsense_helper.config_manager.config_manager import Vlan
+            vlan=Vlan(id="vlan", tag="1", pcp="1", descr="vlan", vlanif="vlan0.1")
+            
+     
+
+        **Required Args**
+
+        - id: str
             the identifier needed for storage, since the technical identifier is always the same ("vlan")
-        tag: str
+        - tag: str
             the tag of the vlan
 
-        Defaults:
-        ----------
-        pcp: str
+        **Defaults**
+
+        - pcp: str
             the priority code point, default = 0  
-        descr: str 
+        - descr: str 
             the description, default = $id
-        vlanif: str 
+        - vlanif: str 
             the interface, default = "vlan0."+tag  
         """ 
+    def __init__(self, id=None, parentinterface=None, tag=None,  vlanif= None, pcp= '0', descr=None ):
+        
         self.id=id
         self.parentinterface=parentinterface 
         self.pcp = pcp
@@ -95,25 +120,37 @@ class Vlan:
         
 
 class Dhcpd:
-    """Creates a dhcp object"""  
+    """
+    class Dhcpd
+    ----------
+
+    Creates a dhcp object
+
+    **Usage**
+
+        .. code-block:: python
+            
+            from opnsense_helper.config_manager.config_manager import Dhcpd
+            dhcpd=Dhcpd(id="vlan", enable="1", range={"_from":"237.84.2.178","_to":"244.178.44.111"})
+    
+    **Req params**
+    ----------
+
+    id : str
+        the id of the object and identifier of the corresponding interface
+    enable : str
+        "1" or "0"
+    range: dict{_from:str,_to:str}
+        the range of ip addresses
+    
+    Defaults
+    ---------
+
+    ddnsdomainalgorithm : str
+        Domain Generation Algorithm - default = "hmac-md"    
+    """ 
     def __init__(self,id=None,enable=None,range=None,ddnsdomainalgorithm="hmac-md"):
-        """Creates a dhcp object
-        Req params
-        ----------
 
-        id : str
-            the id of the object
-        enable : str
-            "1" or "0"
-        range: dict{_from:str,_to:str}
-            the range of ip addresses
-        
-        Defaults
-        ---------
-
-        ddnsdomainalgorithm : str
-            Domain Generation Algorithm - default = "hmac-md"    
-        """
         self.id=id
         self.enable=enable
         self._range=range
@@ -137,11 +174,12 @@ class Config_Manager():
     """Creates a Config_Manager object"""    
     def __init__(self,  base, init):
         """Creates a Config_Manager object
-        Params
-        ------
-        base : Base_Class instance
+        
+        **Params**
+        
+        - base : Base_Class instance
             includes the need objects for ssh and stores the objects
-        init : bool
+        - init : bool
             if True, the xml will get parsed when the Config_Manager object is created
         """
 
@@ -179,12 +217,12 @@ class Config_Manager():
         file specified by the output parameter. The file is written in XML
         format.
 
-        Parameters
-        ----------
-        output : str
+        **Parameters**
+        
+        - output : str
             The path to the file to which the configuration should be written.
             default: self.temp_path
-        put: bool
+        - put: bool
             Automatically copies the configuration to the firewall
         """
         output= output if output is not None else self.temp_path
@@ -213,15 +251,15 @@ class Config_Manager():
         of the elements, and the values are dictionaries containing the
         attributes and subelements of the elements.
 
-        Parameters
-        ----------
-        element : str
+        **Parameters**
+
+        - element : str
             The type of the objects to retrieve. Can be "dhcpd", "interfaces",
             or "vlans".
 
-        Returns
-        -------
-        dict
+        **Returns**
+        
+        - dict
             A dictionary containing all objects of the given type.
         """
         print(f'''          -----------------------------
@@ -261,12 +299,12 @@ class Config_Manager():
         Apply the configuration.
         Transfer a file from the local host to the remote host.
 
-        Parameters
-        ----------
-        _from : str
+        **Parameters**
+        
+        - _from : str
             The path to the file on the local host.
             default: self.temp_path
-        _to : str
+        - _to : str
             The destination path on the remote host where the file should be stored.
             default: self.conf_path
         """
@@ -299,16 +337,16 @@ class Config_Manager():
         This method retrieves an item of a specified type from the in-memory XML data, removes its 'attr' attribute,
         and returns the remaining attributes of the item.
 
-        Parameters
-        ----------
-        type : str
+        **Parameters**
+        
+        - type : str
             The type of the item to retrieve. Can be "dhcpd", "interfaces", or "vlans".
-        item : str
+        - item : str
             The tag of the item to retrieve.
 
-        Returns
-        -------
-        dict
+        **Returns**
+
+        - dict
             A dictionary containing the remaining attributes of the item after removing the 'attr' attribute.
             If the item is not found, prints a message and returns None.
         """
@@ -328,19 +366,19 @@ class Config_Manager():
         This method adds all objects given in the data parameter to the in-memory
         xml data. The objects are stored in the self.objects dictionary.
 
-        Parameters
-        ----------
-        type : str
+        **Parameters**
+        
+        - type : str
             The type of the objects to add. Can be "dhcpd", "interfaces",
             or "vlans".
 
-        data : dict
+        - data : dict
             A dictionary containing the objects to add. The keys are the tags of
             the elements, and the values are dictionaries containing the
             attributes and subelements of the elements.
 
-        Returns
-        -------
+        **Returns**
+        
         None
         """
         for value in data:
@@ -353,8 +391,8 @@ class Config_Manager():
         """
         Get the config file from the remote host and save it to a file.
 
-        Parameters
-        ----------
+        **Parameters**
+        
         _from : str
             The path to the file on the remote host.
         _to : str

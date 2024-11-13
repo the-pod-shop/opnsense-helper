@@ -4,27 +4,49 @@ Exec_Class
 scripts_folder="/usr/local/opnsense/scripts/"
 
 class Scripts():
-     """🐕"""
+     """
+     class Scripts
+     ------------
+
+     Initialize the Scripts class.
+     * its just a wrapper for all the opnsense scripts classes. see attributes below.
+    
+     **Usage**
+
+          .. code-block:: python
+
+               Onsense_Helper.scripts.<attribute>.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class 
+               * The parent object containing the needed ssh connection and the temp path to the config.xml.
+     
+     **Attributes**
+
+         * unbound : unbound instance
+         * system : system instance
+         * syslog : syslog instance
+         * suricata : suricata instance
+         * shell : shell instance
+         * shaper : shaper instance
+         * routes : routes instance
+         * openvpn : openvpn instance
+         * openssh : openssh instance
+         * netflow : netflow instance
+         * ipsec : ipsec instance
+         * interfaces : interfaces instance
+         * health : health instance
+         * firmware : firmware instance
+         * filter : filter instance
+         * dns : dns instance
+         * dhcp : dhcp instance
+         * auth : auth instance
+         * Wireguard : Wireguard instance
+     """
      def __init__(self,base):
-          """
-          A class to represent a person.
 
-          ...
-
-          Attributes
-          ----------
-          name : str
-               first name of the person
-          surname : str
-               family name of the person
-          age : int
-               age of the person
-
-          Methods
-          -------
-          info(additional=""):
-               Prints the person's name and age.
-          """
+          
           self.unbound=unbound(base)
           self.system=system(base)
           self.syslog=syslog(base)
@@ -47,27 +69,38 @@ class Scripts():
 
 class unbound(Exec_Class):
      """
-     Initializes the unbound class, inheriting from Exec_Class. If a base object 
-     is provided, its attributes are copied to the current instance. This 
-     initializer also sets up a dictionary of command configurations for various 
-     unbound operations.
+     class unbound
+     ----------
 
-     Attributes:
-     commands (dict): A dictionary where each key is a command name and the 
-     value is another dictionary containing:
-          - command (str): The path to the script associated with the command.
-          - flags (list): A list of flags for the command. Currently, these 
-          are empty.
+     * Initializes the unbound class, inheriting from Exec_Class. 
+    
+     **Usage**
 
-     Attributes:
-          - wrapper: Executes 'ubound/wrapper.py'.
-          - stats: Executes 'ubound/stats.py'.
-          - start: Executes 'ubound/start.sh'.
-          - restore_db: Executes 'ubound/restore_db.py'.
-          - logger: Executes 'ubound/logger.py'.
-          - check: Executes 'ubound/check.sh'.
-          - cache: Executes 'ubound/cache.sh'.
-          - blocklists: Executes 'ubound/blocklists.py'.
+          .. code-block:: python
+
+               Scripts.unbound.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations with keys for configctl options,
+          each containing command details such as the command string, arguments, 
+          and flags.
+
+          scripts:
+               * wrapper: executes wrapper.py
+               * stats: executes stats.py
+               * start: executes start.sh
+               * restore_db: executes restore_db.py
+               * logger: executes logger.py
+               * check: executes check.sh*
+               * cache: executes cache.sh*
+               * blocklists: executes blocklists.py
      """  
      def __init__(self, base):
    
@@ -87,7 +120,44 @@ class unbound(Exec_Class):
           "blocklists":{ "command":scripts_folder+"ubound/blocklists/","flags":[]},
           }
 class system(Exec_Class):
+     """
+     class system
+     ----------
+
+     Initializes the system class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.system.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for system operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * trigger_config_changed_events: executes trigger_config_changed_events.py
+               * temperature: executes temperature.sh
+               * sysctl: executes sysctl.py
+               * status: executes status.php
+               * ssl_ciphers: executes ssl_ciphers.py
+               * rrd_pfstate_info: executes rrd_pfstate_info.py
+               * rfc5246_cipher_suites: executes rfc5246_cipher_suites.csv
+               * remote_backup: executes remote_backup.php
+               * nameservers: executes nameservers.php
+               * certctl: executes certctl.py
+               * activity: executes activity.py
+     """
      def __init__(self, base):
+
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -106,7 +176,41 @@ class system(Exec_Class):
           "activity":{"command":scripts_folder+"system/activity.py*", "flags":[]},
           }
 class syslog(Exec_Class):
+     """
+     class syslog
+     ----------
+
+     Initializes the syslog class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.syslog.run(<command>,<argument>,<flags>)
+     
+     **Parameters**
+
+          base : Base_Class instance
+          The parent object containing necessary SSH connection details and  configuration settings. 
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for syslog operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * queryLog: executes queryLog.py
+               * logformats: executes logformats/
+               * log_archive: executes log_archive*
+               * lockout_handler: executes lockout_handler*
+               * list_applications: executes list_applications.php
+               * generate_certs: executes generate_certs*
+               * clearlog: executes clearlog.php
+     """
+
      def __init__(self, base):
+
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -121,7 +225,44 @@ class syslog(Exec_Class):
           "clearlog":{"command":scripts_folder+"syslog/ clearlog.php*", "flags":[]},
           }
 class suricata(Exec_Class):
+     """
+     class suricata
+     -------------
+     
+     Initializes the suricata class, inheriting from Exec_Class.
+    
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.suricata.run(<command>,<argument>,<flags>)
+     
+     **Parameters**
+
+          base : Base_Class instance
+          The parent object containing necessary SSH connection details and  configuration settings. 
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for suricata operations
+
+          scripts:
+               * setup: executes setup.sh*
+               * rule-updater: executes rule-updater.py*
+               * queryInstalledRules: executes queryInstalledRules.py*
+               * queryAlertLog: executes queryAlertLog.py*
+               * metadata: executes metadata/
+               * listRuleMetadata: executes listRuleMetadata.py*
+               * listInstallableRulesets: executes listInstallableRulesets.py*
+               * listAlertLogs: executes listAlertLogs.py*
+               * lib: executes lib/
+               * installRules: executes installRules.py*
+               * dropAlertLog: executes dropAlertLog.py*
+               * __init__: executes __init__.py*
+     """
      def __init__(self, base):
+    
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -141,7 +282,43 @@ class suricata(Exec_Class):
           "__init__":{"command":scripts_folder+"suricata/__init__.py*", "flags":[]},
           }
 class shell(Exec_Class):
+     """
+     class Shell
+     ..........
+
+     Initializes the shell class, inheriting from Exec_Class.
+    
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.shell.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+          The parent object containing necessary SSH connection details and  configuration settings. 
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for shell operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * setports: executes setports.php
+               * setaddr: executes setaddr.php
+               * restore: executes restore.sh
+               * reboot: executes reboot.php
+               * ping: executes ping.php
+               * password: executes password.php
+               * halt: executes halt.php
+               * firmware: executes firmware.sh
+               * defaults: executes defaults.php
+               * banner: executes banner.php
+     """
      def __init__(self, base):
+
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -159,7 +336,36 @@ class shell(Exec_Class):
           "banner":{"command":scripts_folder+"shell/banner.php*","flags":[]},
           }
 class shaper(Exec_Class):
+     """
+     class Shaper
+     ------------
+
+     Initializes the shaper class, inheriting from Exec_Class.
+    
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.suricata.shaper(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for shaper operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * update_tables: executes update_tables
+               * lib: executes lib/
+               * dummynet_stats: executes dummynet_stats.py*
+     """
      def __init__(self, base):
+
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -170,7 +376,38 @@ class shaper(Exec_Class):
           "dummynet_stats":{"command":scripts_folder+"shaper/dummynet_stats.py*","flags":[]},
           }
 class routes(Exec_Class):
+     """
+     class routes
+     ------------
+
+     Initializes the routes class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.routes.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for routes operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * show_routes: executes show_routes.py
+               * gateways: executes gateways.php
+               * gateway_watcher: executes gateway_watcher.php
+               * gateway_status: executes gateway_status.php
+               * del_route: executes del_route.py
+     """
      def __init__(self, base):
+     
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -183,7 +420,42 @@ class routes(Exec_Class):
           "del_route":{"command":scripts_folder+"routes/del_route.py*","flags":[]},
           }
 class openvpn(Exec_Class):
+     """
+     class openvpn
+     ------------
+     
+     Initializes the openvpn class, inheriting from Exec_Class.
+
+    
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.openvpn.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for openvpn operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * user_pass_verify: executes user_pass_verify.php
+               * tls_verify: executes tls_verify.php
+               * ovpn_status: executes ovpn_status.py
+               * ovpn_service_control: executes ovpn_service_control.php
+               * ovpn_event: executes ovpn_event.py
+               * kill_session: executes kill_session.py
+               * client_disconnect: executes client_disconnect.sh
+               * client_connect: executes client_connect.php
+     """
      def __init__(self, base):
+
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -199,7 +471,34 @@ class openvpn(Exec_Class):
           "client_connect":{"command":scripts_folder+"openvpn/client_connect.php*", "flags":[]},
           }
 class openssh(Exec_Class):
+     """
+     class openssh
+     -------------
+     
+     Initializes the openssh class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.openssh.run(<command>,<argument>,<flags>)
+     
+     **Parameters**
+
+     base : Base_Class instance
+          The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for openssh operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * ssh_query: executes ssh_query.py
+     """
      def __init__(self, base):
+
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -209,7 +508,40 @@ class openssh(Exec_Class):
           }
 
 class netflow(Exec_Class):
+     """
+     class netflow
+     -------------
+
+     Initialize the netflow class, inheriting from Exec_Class.
+
+     **Usage**
+
+     .. code-block:: python
+
+          Scripts.netflow.run(<command>,<argument>,<flags>)
+
+     **Parameters:**
+     base : Base_Class instance
+          The parent object containing necessary SSH connection details.
+
+     **Attributes:**
+     - commands : dict
+          A dictionary of command configurations for netflow operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+          - lib: executes the netflow library directory
+          - get_top_usage: executes get_top_usage.py script
+          - get_timeseries: executes get_timeseries.py script
+          - flush_all: executes flush_all.sh script
+          - flowd_aggregate_metadata: executes flowd_aggregate_metadata.py script
+          - flowd_aggregate: executes flowd_aggregate.py script
+          - export_details: executes export_details.py script
+          - dump_log: executes dump_log.py script
+          - flowctl_stats: executes flowctl_stats.py script
+     """
      def __init__(self, base):
+     
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -226,7 +558,42 @@ class netflow(Exec_Class):
           "dump_log":{"command":scripts_folder+"netflow/dump_log.py*","flags":[]},
           }
 class ipsec(Exec_Class):
+     """
+     class ipsec
+     -------------
+     
+     Initializes the ipsec class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.ipsec.run(<command>,<argument>,<flags>)
+               
+     **Parameters:**
+     base : Base_Class instance
+          The parent object containing necessary SSH connection details.
+
+     **Attributes:**
+     - commands : dict
+          A dictionary of command configurations for ipsec operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+          - lib: executes the ipsec library directory
+          - updown_event: executes updown_event.py
+          - spddelete: executes spddelete.py
+          - saddelete: executes saddelete.py
+          - list_status: executes list_status.py
+          - list_spd: executes list_spd.py
+          - list_sad: executes list_sad.py
+          - list_leases: executes list_leases.py
+          - get_legacy_vti: executes get_legacy_vti.php
+          - disconnect: executes disconnect.py
+          - connect: executes connect.py
+     """
      def __init__(self, base):
+     
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -245,7 +612,58 @@ class ipsec(Exec_Class):
           "connect":{"command":scripts_folder+"ipsec/connect.py*","flags":[]},
           }
 class interfaces(Exec_Class):
+     """
+     class interfaces
+     ----------------
+
+     Initializes the interfaces class, inheriting from Exec_Class.
+    
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.interfaces.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for interfaces operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * traffic_top: executes traffic_top.py
+               * traffic_stats: executes traffic_stats.php
+               * traceroute: executes traceroute.py
+               * rtsold_resolvconf: executes rtsold_resolvconf.sh
+               * reconfigure_vlans: executes reconfigure_vlans.php
+               * reconfigure_vips: executes reconfigure_vips.php
+               * reconfigure_neighbors: executes reconfigure_neighbors.php
+               * reconfigure_laggs: executes reconfigure_laggs.php
+               * ppp-uptime: executes ppp-uptime.sh
+               * ppp-rename: executes ppp-rename.sh
+               * ppp-linkup: executes ppp-linkup.sh
+               * ppp-linkdown: executes ppp-linkdown.sh
+               * portprobe: executes portprobe.py
+               * ping: executes ping.py
+               * mpd: executes mpd.script
+               * macinfo: executes macinfo.py
+               * list_sockstat: executes list_sockstat.py
+               * list_ndp: executes list_ndp.py
+               * list_macdb: executes list_macdb.py
+               * list_arp: executes list_arp.py
+               * ifctl: executes ifctl.sh
+               * dhclient: executes dhclient-script
+               * carp_set_status: executes carp_set_status.php
+               * carp_global_status: executes carp_global_status.php
+               * capture: executes capture.py
+     """
      def __init__(self, base):
+
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -278,7 +696,36 @@ class interfaces(Exec_Class):
           "capture":{"command": scripts_folder+"interfaces/capture.py*", "flags":[]},
           }
 class health(Exec_Class):
+     """
+     class heatlh
+     .............
+     
+     Initializes the health class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.health.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for health operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * listReports: executes listReports.py
+               * flush_rrd: executes flush_rrd.py
+               * fetchData: executes fetchData.py
+     """
      def __init__(self, base):
+
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -289,7 +736,58 @@ class health(Exec_Class):
           "fetchData":{"command":scripts_folder+"health/fetchData.py*","flags":[]},
           }
 class firmware(Exec_Class):
+     """
+     clas firmware 
+     .............
+     
+     Initializes the firmware class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.firmware.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for firmware operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * upgrade: executes upgrade.sh
+               * update: executes update.sh
+               * unlock: executes unlock.sh
+               * sync.subr: executes sync.subr.sh
+               * sync: executes sync.sh
+               * security: executes security.sh
+               * running: executes running.sh
+               * resync: executes resync.sh
+               * remove: executes remove.sh
+               * reinstall: executes reinstall.sh
+               * register.: executes register.php
+               * reboot: executes reboot.sh
+               * read: executes read.sh
+               * query: executes query.sh
+               * product.: executes product.php
+               * plugin: executes plugin.sh
+               * lock: executes lock.sh
+               * license: executes license.sh
+               * launcher: executes launcher.sh
+               * latest.: executes latest.php
+               * install: executes install.sh
+               * health: executes health.sh
+               * connection: executes connection.sh
+               * check: executes check.sh
+               * changelog: executes changelog.sh
+     """
      def __init__(self, base):
+     
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -322,7 +820,53 @@ class firmware(Exec_Class):
           "changelog":{"command":scripts_folder+"firmware/changelog.sh*","flags":[]},
           }
 class filter(Exec_Class):
+     """
+     class filter
+     .............
+     Initializes the filter class, inheriting from Exec_Class.
+     
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.filter.run(<command>,<argument>,<flags>)
+     
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details and  configuration settings. 
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for filter operations
+
+          scripts:
+               * update_tables: executes update_tables.py*
+               * update_bogons: executes update_bogons.sh*
+               * run_unittests: executes run_unittests.py*
+               * rule_stats: executes rule_stats.py*
+               * rollback_timer.: executes rollback_timer.php*
+               * rollback_cancel.: executes rollback_cancel.php*
+               * read_log: executes read_log.py*
+               * pftop: executes pftop.py*
+               * pftablecount: executes pftablecount.py*
+               * pfstatistics: executes pfstatistics.py*
+               * list_tables: executes list_tables.py*
+               * list_table: executes list_table.py*
+               * list_states: executes list_states.py*
+               * list_rule_ids: executes list_rule_ids.py*
+               * list_pfsync: executes list_pfsync.py*
+               * list_osfp: executes list_osfp.py*
+               * kill_table: executes kill_table.py*
+               * kill_states: executes kill_states.py*
+               * find_table_references: executes find_table_references.py*
+               * download_geoip: executes download_geoip.py*
+               * delete_table: executes delete_table.py*
+     """
      def __init__(self, base):
+    
+     
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -351,7 +895,32 @@ class filter(Exec_Class):
           "delete_table":{"commands":scripts_folder+"filter/delete_table.py*","flags":[]},
           }
 class dns(Exec_Class):
+     """
+     class dns
+     ........
+     
+     Initializes the dns class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.dns.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+
+          scripts:
+               * query_dns: executes query_dns.py
+     """
      def __init__(self, base):
+     
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -361,7 +930,40 @@ class dns(Exec_Class):
           }
 
 class dhcp(Exec_Class):
+     """
+     class dhcp
+     ........
+     
+     Initializes the dhcp class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.dhcp.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+
+          scripts:
+               * unbound_watche: executes unbound_watcher.py*
+               * prefixe: executes prefixes.sh*
+               * prefixes: executes prefixes.php*
+               * get_leases: executes get_leases6.py*
+               * get_lease: executes get_leases.py*
+               * get_kea_lease: executes get_kea_leases.py*
+               * dnsmasq_watche: executes dnsmasq_watcher.py*
+               * cleanup_leases6: executes cleanup_leases6.php*
+               * cleanup_leases4: executes cleanup_leases4.php*
+     """
      def __init__(self, base):
+     
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -378,7 +980,35 @@ class dhcp(Exec_Class):
           "cleanup_leases4":{"command":scripts_folder+"dhcp/cleanup_leases4.php*","flags":[]},
           }
 class auth(Exec_Class):
+     """
+     class  auth
+     ------
+     
+     Initializes the auth class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.auth.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for auth operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * list_group_members: executes list_group_members.php
+               * add_user: executes add_user.php
+     """
      def __init__(self, base):
+     
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)
@@ -388,7 +1018,38 @@ class auth(Exec_Class):
           "add_user":{"command":scripts_folder+"auth/add_user.php*","flags":[]},
           }
 class Wireguard(Exec_Class):
+     """
+     class Wireguard
+     ------
+
+     Initializes the Wireguard class, inheriting from Exec_Class.
+
+     **Usage**
+
+          .. code-block:: python
+
+               Scripts.Wireguard.run(<command>,<argument>,<flags>)
+
+     **Parameters**
+
+          base : Base_Class instance
+               The parent object containing necessary SSH connection details.
+
+     **Attributes**
+
+     - commands : dict
+          A dictionary of command configurations for Wireguard operations,
+          each containing command details such as the command string and flags.
+
+          scripts:
+               * wg_show: executes wg_show.py
+               * wg-service-control: executes wg-service-control.php
+               * reresolve-dns: executes reresolve-dns.py
+               * gen_keypair: executes gen_keypair.py
+     """
+
      def __init__(self, base):
+     
           super(Exec_Class).__init__()
           if base is not None:
             self.__dict__.update(base.__dict__)

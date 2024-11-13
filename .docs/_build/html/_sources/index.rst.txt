@@ -1,7 +1,7 @@
 Opnsense-Helper
 ==========================================
 
-**The backend framework for opnsense**
+**The backend api for opnsense**
 
 * create, assign and enable lan / phy interfaces and all the other stuff that is ***Not enabled*** in the opnsense api
 

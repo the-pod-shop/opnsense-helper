@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="opnsense-helper" href="README.html" /> 
+    <link rel="prev" title="about opnsense-helper" href="README.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,12 +43,43 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">About:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="README.html">opnsense-helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">about opnsense-helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#install">install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#usage">usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#motivation">motivation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Python API-Dokumentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Opnsense-Helper</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.opnsense_helper.Opnsense_Helper"><code class="docutils literal notranslate"><span class="pre">Opnsense_Helper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#coonfig-manager">coonfig_manager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager"><code class="docutils literal notranslate"><span class="pre">Config_Manager</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.close_con"><code class="docutils literal notranslate"><span class="pre">Config_Manager.close_con()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.get_all"><code class="docutils literal notranslate"><span class="pre">Config_Manager.get_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.get_conf"><code class="docutils literal notranslate"><span class="pre">Config_Manager.get_conf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.get_dif"><code class="docutils literal notranslate"><span class="pre">Config_Manager.get_dif()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.get_item"><code class="docutils literal notranslate"><span class="pre">Config_Manager.get_item()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.initialize"><code class="docutils literal notranslate"><span class="pre">Config_Manager.initialize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.put_file"><code class="docutils literal notranslate"><span class="pre">Config_Manager.put_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.remove_items"><code class="docutils literal notranslate"><span class="pre">Config_Manager.remove_items()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.save"><code class="docutils literal notranslate"><span class="pre">Config_Manager.save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Config_Manager.set"><code class="docutils literal notranslate"><span class="pre">Config_Manager.set()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Dhcpd"><code class="docutils literal notranslate"><span class="pre">Dhcpd</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Dhcpd.initialize"><code class="docutils literal notranslate"><span class="pre">Dhcpd.initialize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Interface"><code class="docutils literal notranslate"><span class="pre">Interface</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Interface.initialize"><code class="docutils literal notranslate"><span class="pre">Interface.initialize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Vlan"><code class="docutils literal notranslate"><span class="pre">Vlan</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#opnsense_helper.config_manager.config_manager.Vlan.initialize"><code class="docutils literal notranslate"><span class="pre">Vlan.initialize()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#commands">commands</a><ul>
@@ -114,22 +145,422 @@
 <dt class="sig sig-object py" id="opnsense_helper.opnsense_helper.Opnsense_Helper">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.opnsense_helper.</span></span><span class="sig-name descname"><span class="pre">Opnsense_Helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssh_auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_auth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/conf/config.xml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./config.xml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_config_manager</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.opnsense_helper.Opnsense_Helper" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<section id="class-opnsense-helper">
+<h2>class Opnsense_Helper<a class="headerlink" href="#class-opnsense-helper" title="Link to this heading"></a></h2>
 <p>Initialize an Opnsense_Helper instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>host</strong> – The hostname or ip address of the opnsense firewall.</p></li>
-<li><p><strong>ssh_auth</strong> – A dictionary containing the ssh authentication data.
-The dictionary must contain the keys “user” and “passw”.</p></li>
-<li><p><strong>api_auth</strong> – A dictionary containing the api authentication data.
-The dictionary must contain the keys “api_key”, “api_secret”, “ssl” and “verify”.</p></li>
-<li><p><strong>conf_path</strong> – The path to the config.xml on the opnsense firewall.</p></li>
-<li><p><strong>temp_path</strong> – The path to the temporary config.xml file.</p></li>
-<li><p><strong>verbose</strong> – If True, the class will print debug messages.</p></li>
-<li><p><strong>init_config_manager</strong> – If True, the class will initialize the config_manager.</p></li>
-</ul>
+<dl>
+<dt><strong>Usage</strong></dt><dd><p>see example.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opnsense_helper.opnsense_helper</span> <span class="kn">import</span> <span class="n">Opnsense_Helper</span>
+<span class="kn">from</span> <span class="nn">opnsense_helper.config_manager.config_manager</span> <span class="kn">import</span> <span class="n">Vlan</span><span class="p">,</span> <span class="n">Dhcpd</span><span class="p">,</span> <span class="n">Interface</span>
+<span class="n">helper</span><span class="o">=</span><span class="n">Opnsense_Helper</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span><span class="n">ssh_auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span><span class="n">temp_path</span><span class="o">=</span><span class="n">temp_path</span><span class="p">,</span> <span class="n">init_config_manager</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd>
 </dl>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>host<span class="classifier">str</span></dt><dd><p>The hostname or ip address of the opnsense firewall.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>ssh_auth<span class="classifier">dict</span></dt><dd><p>A dictionary containing the ssh authentication data.
+The dictionary must contain the keys “user” and “passw”.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>api_auth<span class="classifier">dict</span></dt><dd><p>A dictionary containing the api authentication data.
+The dictionary must contain the keys “api_key”, “api_secret”, “ssl” and “verify”.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>conf_path<span class="classifier">str</span></dt><dd><p>The path to the config.xml on the opnsense firewall.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>temp_path<span class="classifier">str</span></dt><dd><p>The path to the temporary config.xml file.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>verbose<span class="classifier">bool</span></dt><dd><p>If True, the class will print debug messages.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>init_config_manager<span class="classifier">bool</span></dt><dd><p>If True, the class will initialize the config_manager.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Attributes</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>config_manager<span class="classifier">Config_Manager</span></dt><dd><p>An instance of the Config_Manager class.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>commands<span class="classifier">Commands</span></dt><dd><p>An instance of the Commands class.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>scripts<span class="classifier">Scripts</span></dt><dd><p>An instance of the Scripts class.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</dd></dl>
+
+</section>
+<section id="coonfig-manager">
+<h1>coonfig_manager<a class="headerlink" href="#coonfig-manager" title="Link to this heading"></a></h1>
+<p>Config_Manager class lets you assign configurations, by passing arrays of the corresponding Instances.
+Config_Manager will  parse those objects to xml and automatically reconfigure your devices.</p>
+<dl class="py class" id="module-opnsense_helper.config_manager.config_manager">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.config_manager.config_manager.</span></span><span class="sig-name descname"><span class="pre">Config_Manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Creates a Config_Manager object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.close_con">
+<span class="sig-name descname"><span class="pre">close_con</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.close_con" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.get_all">
+<span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.get_all" title="Link to this definition"></a></dt>
+<dd><p>Get all objects of a given type from the in-memory xml data.</p>
+<p>This method returns a dictionary containing all objects of this type. The dictionary keys are the tags
+of the elements, and the values are dictionaries containing the
+attributes and subelements of the elements.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>element<span class="classifier">str</span></dt><dd><p>The type of the objects to retrieve. Can be “dhcpd”, “interfaces”,
+or “vlans”.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>dict</dt><dd><p>A dictionary containing all objects of the given type.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.get_conf">
+<span class="sig-name descname"><span class="pre">get_conf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.get_conf" title="Link to this definition"></a></dt>
+<dd><p>Get the config file from the remote host and save it to a file.</p>
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt>_from<span class="classifier">str</span></dt><dd><p>The path to the file on the remote host.</p>
+</dd>
+<dt>_to<span class="classifier">str</span></dt><dd><p>The path to the file on the local host. If None, the file is saved
+to the location specified in self.temp_path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.get_dif">
+<span class="sig-name descname"><span class="pre">get_dif</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.get_dif" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.get_item">
+<span class="sig-name descname"><span class="pre">get_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.get_item" title="Link to this definition"></a></dt>
+<dd><p>Retrieve a specific item from the in-memory XML data.</p>
+<p>This method retrieves an item of a specified type from the in-memory XML data, removes its ‘attr’ attribute,
+and returns the remaining attributes of the item.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>type<span class="classifier">str</span></dt><dd><p>The type of the item to retrieve. Can be “dhcpd”, “interfaces”, or “vlans”.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>item<span class="classifier">str</span></dt><dd><p>The tag of the item to retrieve.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>dict</dt><dd><p>A dictionary containing the remaining attributes of the item after removing the ‘attr’ attribute.
+If the item is not found, prints a message and returns None.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.initialize" title="Link to this definition"></a></dt>
+<dd><p>Initialize the configuration.</p>
+<p>This method reads the configuration from the in-memory configuration. 
+The configuration is read from the
+remote host via the SSH protocol or the opnsense API.
+Either run get_backup() or get_conf() before calling this method.
+This method is not called automatically when the class is instantiated, so you need to get the conf file before and then call this method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.put_file">
+<span class="sig-name descname"><span class="pre">put_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.put_file" title="Link to this definition"></a></dt>
+<dd><p>Apply the configuration.
+Transfer a file from the local host to the remote host.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>_from<span class="classifier">str</span></dt><dd><p>The path to the file on the local host.
+default: self.temp_path</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>_to<span class="classifier">str</span></dt><dd><p>The destination path on the remote host where the file should be stored.
+default: self.conf_path</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.remove_items">
+<span class="sig-name descname"><span class="pre">remove_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.remove_items" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">put</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.save" title="Link to this definition"></a></dt>
+<dd><p>Save the current configuration to a file.</p>
+<p>This method takes the current in-memory configuration and saves it to a
+file specified by the output parameter. The file is written in XML
+format.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>output<span class="classifier">str</span></dt><dd><p>The path to the file to which the configuration should be written.
+default: self.temp_path</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>put: bool</dt><dd><p>Automatically copies the configuration to the firewall</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Config_Manager.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Config_Manager.set" title="Link to this definition"></a></dt>
+<dd><p>Set objects of a given type to the in-memory xml data.</p>
+<p>This method adds all objects given in the data parameter to the in-memory
+xml data. The objects are stored in the self.objects dictionary.</p>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>type<span class="classifier">str</span></dt><dd><p>The type of the objects to add. Can be “dhcpd”, “interfaces”,
+or “vlans”.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>data<span class="classifier">dict</span></dt><dd><p>A dictionary containing the objects to add. The keys are the tags of
+the elements, and the values are dictionaries containing the
+attributes and subelements of the elements.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>None</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Dhcpd">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.config_manager.config_manager.</span></span><span class="sig-name descname"><span class="pre">Dhcpd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddnsdomainalgorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hmac-md'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Dhcpd" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<section id="class-dhcpd">
+<h2>class Dhcpd<a class="headerlink" href="#class-dhcpd" title="Link to this heading"></a></h2>
+<p>Creates a dhcp object</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opnsense_helper.config_manager.config_manager</span> <span class="kn">import</span> <span class="n">Dhcpd</span>
+<span class="n">dhcpd</span><span class="o">=</span><span class="n">Dhcpd</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;vlan&quot;</span><span class="p">,</span> <span class="n">enable</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;_from&quot;</span><span class="p">:</span><span class="s2">&quot;237.84.2.178&quot;</span><span class="p">,</span><span class="s2">&quot;_to&quot;</span><span class="p">:</span><span class="s2">&quot;244.178.44.111&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="req-params">
+<h2><strong>Req params</strong><a class="headerlink" href="#req-params" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>id<span class="classifier">str</span></dt><dd><p>the id of the object and identifier of the corresponding interface</p>
+</dd>
+<dt>enable<span class="classifier">str</span></dt><dd><p>“1” or “0”</p>
+</dd>
+<dt>range: dict{_from:str,_to:str}</dt><dd><p>the range of ip addresses</p>
+</dd>
+</dl>
+</section>
+<section id="defaults">
+<h2>Defaults<a class="headerlink" href="#defaults" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>ddnsdomainalgorithm<span class="classifier">str</span></dt><dd><p>Domain Generation Algorithm - default = “hmac-md”</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Dhcpd.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Dhcpd.initialize" title="Link to this definition"></a></dt>
+<dd><p>This method parses the xml parent and updates the class attributes</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Interface">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.config_manager.config_manager.</span></span><span class="sig-name descname"><span class="pre">Interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ipaddr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subnet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'32'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spoofmac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Interface" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<section id="class-interface">
+<h2>class Interface<a class="headerlink" href="#class-interface" title="Link to this heading"></a></h2>
+<p>Creates a Interface object
+The ID is the technical identifier. 
+This is required and you need to find out which “opt” to use, 
+because rn there is no function that provides that.
+The interface key in the xml are the identifiers, in this case the class id`s.
+Im not sure if they have a certain naming convention</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opnsense_helper.config_manager.config_manager</span> <span class="kn">import</span> <span class="n">Interface</span>
+<span class="n">interface</span><span class="o">=</span><span class="n">Interface</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;vlan&quot;</span><span class="p">,</span> <span class="n">descr</span><span class="o">=</span><span class="s2">&quot;vlan&quot;</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="s2">&quot;vlan&quot;</span><span class="p">,</span> <span class="n">enable</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">ipaddr</span><span class="o">=</span><span class="s2">&quot;38.0.101.76&quot;</span><span class="p">,</span> <span class="n">subnet</span><span class="o">=</span><span class="s2">&quot;32&quot;</span><span class="p">,</span> <span class="n">spoofmac</span><span class="o">=</span><span class="s2">&quot;00:00:00:00:00:00&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Required Args</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>id<span class="classifier">str </span></dt><dd><p>the technical identifier</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>interface<span class="classifier">str </span></dt><dd><p>target interface</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>enable<span class="classifier">str</span></dt><dd><p>1, or 0 for disable or disable</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>descr<span class="classifier">str</span></dt><dd><p>description, or name</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Defaults</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>subnet<span class="classifier">str</span></dt><dd><p>CIDR notation, default=”32”</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>ipaddr<span class="classifier">str </span></dt><dd><p>the ipv4 address, default=None</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>spoofmac: str </dt><dd><p>the spoofed mac, default=None</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Interface.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Interface.initialize" title="Link to this definition"></a></dt>
+<dd><p>This method parses the xml parent and updates the class attributes.
+It is used in the config_manager to initialize the class with the data from the xml.
+The parent element of the xml tree is passed as an argument.</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Vlan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.config_manager.config_manager.</span></span><span class="sig-name descname"><span class="pre">Vlan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parentinterface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vlanif</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pcp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Vlan" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<section id="class-vlan">
+<h2>class Vlan<a class="headerlink" href="#class-vlan" title="Link to this heading"></a></h2>
+<p>Creates a vlan object
+<strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opnsense_helper.config_manager.config_manager</span> <span class="kn">import</span> <span class="n">Vlan</span>
+<span class="n">vlan</span><span class="o">=</span><span class="n">Vlan</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;vlan&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">pcp</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">descr</span><span class="o">=</span><span class="s2">&quot;vlan&quot;</span><span class="p">,</span> <span class="n">vlanif</span><span class="o">=</span><span class="s2">&quot;vlan0.1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Required Args</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>id: str</dt><dd><p>the identifier needed for storage, since the technical identifier is always the same (“vlan”)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>tag: str</dt><dd><p>the tag of the vlan</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Defaults</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>pcp: str</dt><dd><p>the priority code point, default = 0</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>descr: str </dt><dd><p>the description, default = $id</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>vlanif: str </dt><dd><p>the interface, default = “vlan0.”+tag</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="opnsense_helper.config_manager.config_manager.Vlan.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.config_manager.config_manager.Vlan.initialize" title="Link to this definition"></a></dt>
+<dd><p>This method parses the xml parent and updates the class attributes.</p>
+</dd></dl>
+
+</section>
 </dd></dl>
 
 </section>
@@ -141,7 +572,14 @@ The dictionary must contain the keys “api_key”, “api_secret”, “ssl” 
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.commands.commands.</span></span><span class="sig-name descname"><span class="pre">Commands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.commands.commands.Commands" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <section id="class-commands">
-<h2>Class Commands<a class="headerlink" href="#class-commands" title="Link to this heading"></a></h2>
+<h2>class Commands<a class="headerlink" href="#class-commands" title="Link to this heading"></a></h2>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opnsense_helper.opnsense_helper</span> <span class="kn">import</span> <span class="n">Onsense_Helper</span>
+<span class="n">Onsense_Helper</span><span class="o">.</span><span class="n">commands</span><span class="o">.&lt;</span><span class="n">attribute</span><span class="o">&gt;.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p>Initialize the Commands class.
 * its just a wrapper for the pluginctl, configctl and reconfigure classes.</p>
 <p><strong>Parameters</strong></p>
@@ -162,12 +600,125 @@ The dictionary must contain the keys “api_key”, “api_secret”, “ssl” 
 <dt class="sig sig-object py" id="opnsense_helper.commands.commands.configctl">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.commands.commands.</span></span><span class="sig-name descname"><span class="pre">configctl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.commands.commands.configctl" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-configctl">
+<h2>class configctl<a class="headerlink" href="#class-configctl" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Initialize the configctl class.</p></li>
+<li><p>Inherits from the Exec_Class class.</p></li>
+</ul>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opnsense_helper.opnsense_helper</span> <span class="kn">import</span> <span class="n">Onsense_Helper</span>
+<span class="n">Commands</span><span class="o">.</span><span class="n">configctl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details and
+configuration settings. If provided, its attributes will be copied
+to this instance.</p>
+</dd>
+</dl>
+<p><strong>Attributes</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations with keys for configctl options,
+each containing command details such as the command string, arguments, 
+and flags.</p>
+<ul>
+<li><p>auth : Execute configctl auth command</p></li>
+<li><p>captiveportal : Execute configctl captiveportal command</p></li>
+<li><p>configd : Execute configctl configd command</p></li>
+<li><p>cron : Execute configctl cron command</p></li>
+<li><p>dhcpd : Execute configctl dhcpd command</p></li>
+<li><p>dhcpd6 : Execute configctl dhcpd6 command</p></li>
+<li><p>dns : Execute configctl dns command</p></li>
+<li><p>filter : Execute configctl filter command</p></li>
+<li><p>firmware : Execute configctl firmware command</p></li>
+<li><p>health : Execute configctl health command</p></li>
+<li><p>ids : Execute configctl ids command</p></li>
+<li><p>interface : Execute configctl interface command</p></li>
+<li><p>ipfw : Execute configctl ipfw command</p></li>
+<li><p>ipsec : Execute configctl ipsec command</p></li>
+<li><p>kea : Execute configctl kea command</p></li>
+<li><p>monit : Execute configctl monit command</p></li>
+<li><p>netflow : Execute configctl netflow command</p></li>
+<li><p>openssh : Execute configctl openssh command</p></li>
+<li><p>openvpn : Execute configctl openvpn command</p></li>
+<li><p>syslog : Execute configctl syslog command</p></li>
+<li><p>system : Execute configctl system command</p></li>
+<li><p>template : Execute configctl template command</p></li>
+<li><p>unbound : Execute configctl unbound command</p></li>
+<li><p>webgui : Execute configctl webgui command</p></li>
+<li><p>wireguard : Execute configctl wireguard command</p></li>
+<li><p>zfs : Execute configctl zfs command</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.commands.commands.pluginctl">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.commands.commands.</span></span><span class="sig-name descname"><span class="pre">pluginctl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.commands.commands.pluginctl" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-pluginctl">
+<h2>class pluginctl<a class="headerlink" href="#class-pluginctl" title="Link to this heading"></a></h2>
+<p>Initializes the pluginctl class, inheriting from Exec_Class. If a base object 
+is provided, its attributes are copied to the current instance. This 
+initializer also sets up a dictionary of command configurations for various 
+pluginctl operations.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opnsense_helper.opnsense_helper</span> <span class="kn">import</span> <span class="n">Onsense_Helper</span>
+<span class="n">Commands</span><span class="o">.</span><span class="n">pluginctl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Attributes:</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>commands<span class="classifier">dict </span></dt><dd><dl class="simple">
+<dt>A dictionary where each key is a command name and the value is another dictionary containing:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argument<span class="classifier">str</span></dt><dd><p>The argument to be passed to the command. This is currently always None.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>flags<span class="classifier">list </span></dt><dd><p>A list of flags for the command. Currently, these are empty.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>command<span class="classifier">str </span></dt><dd><p>The path to the script associated with the command.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>The commands are as follows:</dt><dd><ul class="simple">
+<li><p>ipv4: pluginctl -4, returns primary address of interface</p></li>
+<li><p>config: pluginctl -c, executes plugin [_configure] hook</p></li>
+<li><p>ifconfig: pluginctl -D, lists available devices</p></li>
+<li><p>device_info: pluginctl -d, lists registered devices</p></li>
+<li><p>flush: pluginctl -f, flushes config property (raw, e.g. system.firmware.plugins)</p></li>
+<li><p>get: pluginctl -g, get config property (raw, e.g. system.firmware.plugins)</p></li>
+<li><p>info: pluginctl -I, lists registered device statistics</p></li>
+<li><p>if_reg: pluginctl -i, invokes dynamic interface registration</p></li>
+<li><p>run: pluginctl -r, runs a command (e.g. myservice restart)</p></li>
+<li><p>service_dump: pluginctl -S, dumps service metadata</p></li>
+<li><p>service: pluginctl -s, executes service command (e.g. myservice restart)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py class">
@@ -175,29 +726,37 @@ The dictionary must contain the keys “api_key”, “api_secret”, “ssl” 
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.commands.commands.</span></span><span class="sig-name descname"><span class="pre">reconfigure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.commands.commands.reconfigure" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
 <section id="class-reconfigure">
-<h2>Class reconfigure<a class="headerlink" href="#class-reconfigure" title="Link to this heading"></a></h2>
+<h2>class reconfigure<a class="headerlink" href="#class-reconfigure" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Initialize the reconfigure class.</p></li>
 <li><p>Inherits from the Exec_Class class.</p></li>
 </ul>
-<p><strong>Usage</strong>
-.. code-block:: python</p>
+<p><strong>Usage</strong></p>
 <blockquote>
-<div><p>Commands.reconfigure.run(&lt;command&gt;,&lt;argument&gt;,&lt;flags&gt;)</p>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opnsense_helper.opnsense_helper</span> <span class="kn">import</span> <span class="n">Onsense_Helper</span>
+<span class="n">Commands</span><span class="o">.</span><span class="n">reconfigure</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
 </div></blockquote>
-<p><strong>Parameters</strong>
-base : Base_Class instance</p>
-<blockquote>
-<div><p>The parent object containing necessary SSH connection details and
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details and
 configuration settings. If provided, its attributes will be copied
 to this instance.</p>
-</div></blockquote>
-<p><strong>Attributes</strong>
-commands : dict</p>
+</dd>
+</dl>
+<p><strong>Attributes</strong></p>
 <blockquote>
-<div><p>A dictionary of command configurations with keys for ‘vlans’ and ‘interfaces’,
+<div><dl class="simple">
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations with keys for ‘vlans’ and ‘interfaces’,
 each containing command details such as the command string, arguments, 
 and flags.</p>
+<ul class="simple">
+<li><p>vlans : Execute reconfigure_vlans.php</p></li>
+<li><p>interfaces : Execute configctl interface reconfigure</p></li>
+</ul>
+</dd>
+</dl>
 </div></blockquote>
 </section>
 </dd></dl>
@@ -210,148 +769,897 @@ and flags.</p>
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.Scripts">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">Scripts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.Scripts" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>🐕</p>
+<section id="class-scripts">
+<h2>class Scripts<a class="headerlink" href="#class-scripts" title="Link to this heading"></a></h2>
+<p>Initialize the Scripts class.
+* its just a wrapper for all the opnsense scripts classes. see attributes below.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Onsense_Helper</span><span class="o">.</span><span class="n">scripts</span><span class="o">.&lt;</span><span class="n">attribute</span><span class="o">&gt;.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class </span></dt><dd><ul class="simple">
+<li><p>The parent object containing the needed ssh connection and the temp path to the config.xml.</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>unbound : unbound instance</p></li>
+<li><p>system : system instance</p></li>
+<li><p>syslog : syslog instance</p></li>
+<li><p>suricata : suricata instance</p></li>
+<li><p>shell : shell instance</p></li>
+<li><p>shaper : shaper instance</p></li>
+<li><p>routes : routes instance</p></li>
+<li><p>openvpn : openvpn instance</p></li>
+<li><p>openssh : openssh instance</p></li>
+<li><p>netflow : netflow instance</p></li>
+<li><p>ipsec : ipsec instance</p></li>
+<li><p>interfaces : interfaces instance</p></li>
+<li><p>health : health instance</p></li>
+<li><p>firmware : firmware instance</p></li>
+<li><p>filter : filter instance</p></li>
+<li><p>dns : dns instance</p></li>
+<li><p>dhcp : dhcp instance</p></li>
+<li><p>auth : auth instance</p></li>
+<li><p>Wireguard : Wireguard instance</p></li>
+</ul>
+</div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.Wireguard">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">Wireguard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.Wireguard" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-wireguard">
+<h2>class Wireguard<a class="headerlink" href="#class-wireguard" title="Link to this heading"></a></h2>
+<p>Initializes the Wireguard class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">Wireguard</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for Wireguard operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>wg_show: executes wg_show.py</p></li>
+<li><p>wg-service-control: executes wg-service-control.php</p></li>
+<li><p>reresolve-dns: executes reresolve-dns.py</p></li>
+<li><p>gen_keypair: executes gen_keypair.py</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.auth">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.auth" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-auth">
+<h2>class  auth<a class="headerlink" href="#class-auth" title="Link to this heading"></a></h2>
+<p>Initializes the auth class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for auth operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>list_group_members: executes list_group_members.php</p></li>
+<li><p>add_user: executes add_user.php</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.dhcp">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">dhcp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.dhcp" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-dhcp">
+<h2>class dhcp<a class="headerlink" href="#class-dhcp" title="Link to this heading"></a></h2>
+<p>Initializes the dhcp class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">dhcp</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><p>commands : dict</p>
+<blockquote>
+<div><dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>unbound_watche: executes unbound_watcher.py*</p></li>
+<li><p>prefixe: executes prefixes.sh*</p></li>
+<li><p>prefixes: executes prefixes.php*</p></li>
+<li><p>get_leases: executes get_leases6.py*</p></li>
+<li><p>get_lease: executes get_leases.py*</p></li>
+<li><p>get_kea_lease: executes get_kea_leases.py*</p></li>
+<li><p>dnsmasq_watche: executes dnsmasq_watcher.py*</p></li>
+<li><p>cleanup_leases6: executes cleanup_leases6.php*</p></li>
+<li><p>cleanup_leases4: executes cleanup_leases4.php*</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.dns">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">dns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.dns" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-dns">
+<h2>class dns<a class="headerlink" href="#class-dns" title="Link to this heading"></a></h2>
+<p>Initializes the dns class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">dns</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><p>commands : dict</p>
+<blockquote>
+<div><dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>query_dns: executes query_dns.py</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.filter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.filter" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-filter">
+<h2>class filter<a class="headerlink" href="#class-filter" title="Link to this heading"></a></h2>
+<p>Initializes the filter class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">filter</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details and  configuration settings.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for filter operations</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>update_tables: executes update_tables.py*</p></li>
+<li><p>update_bogons: executes update_bogons.sh*</p></li>
+<li><p>run_unittests: executes run_unittests.py*</p></li>
+<li><p>rule_stats: executes rule_stats.py*</p></li>
+<li><p>rollback_timer.: executes rollback_timer.php*</p></li>
+<li><p>rollback_cancel.: executes rollback_cancel.php*</p></li>
+<li><p>read_log: executes read_log.py*</p></li>
+<li><p>pftop: executes pftop.py*</p></li>
+<li><p>pftablecount: executes pftablecount.py*</p></li>
+<li><p>pfstatistics: executes pfstatistics.py*</p></li>
+<li><p>list_tables: executes list_tables.py*</p></li>
+<li><p>list_table: executes list_table.py*</p></li>
+<li><p>list_states: executes list_states.py*</p></li>
+<li><p>list_rule_ids: executes list_rule_ids.py*</p></li>
+<li><p>list_pfsync: executes list_pfsync.py*</p></li>
+<li><p>list_osfp: executes list_osfp.py*</p></li>
+<li><p>kill_table: executes kill_table.py*</p></li>
+<li><p>kill_states: executes kill_states.py*</p></li>
+<li><p>find_table_references: executes find_table_references.py*</p></li>
+<li><p>download_geoip: executes download_geoip.py*</p></li>
+<li><p>delete_table: executes delete_table.py*</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.firmware">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">firmware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.firmware" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="clas-firmware">
+<h2>clas firmware<a class="headerlink" href="#clas-firmware" title="Link to this heading"></a></h2>
+<p>Initializes the firmware class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for firmware operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>upgrade: executes upgrade.sh</p></li>
+<li><p>update: executes update.sh</p></li>
+<li><p>unlock: executes unlock.sh</p></li>
+<li><p>sync.subr: executes sync.subr.sh</p></li>
+<li><p>sync: executes sync.sh</p></li>
+<li><p>security: executes security.sh</p></li>
+<li><p>running: executes running.sh</p></li>
+<li><p>resync: executes resync.sh</p></li>
+<li><p>remove: executes remove.sh</p></li>
+<li><p>reinstall: executes reinstall.sh</p></li>
+<li><p>register.: executes register.php</p></li>
+<li><p>reboot: executes reboot.sh</p></li>
+<li><p>read: executes read.sh</p></li>
+<li><p>query: executes query.sh</p></li>
+<li><p>product.: executes product.php</p></li>
+<li><p>plugin: executes plugin.sh</p></li>
+<li><p>lock: executes lock.sh</p></li>
+<li><p>license: executes license.sh</p></li>
+<li><p>launcher: executes launcher.sh</p></li>
+<li><p>latest.: executes latest.php</p></li>
+<li><p>install: executes install.sh</p></li>
+<li><p>health: executes health.sh</p></li>
+<li><p>connection: executes connection.sh</p></li>
+<li><p>check: executes check.sh</p></li>
+<li><p>changelog: executes changelog.sh</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.health">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">health</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.health" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-heatlh">
+<h2>class heatlh<a class="headerlink" href="#class-heatlh" title="Link to this heading"></a></h2>
+<p>Initializes the health class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">health</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for health operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>listReports: executes listReports.py</p></li>
+<li><p>flush_rrd: executes flush_rrd.py</p></li>
+<li><p>fetchData: executes fetchData.py</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.interfaces">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">interfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.interfaces" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-interfaces">
+<h2>class interfaces<a class="headerlink" href="#class-interfaces" title="Link to this heading"></a></h2>
+<p>Initializes the interfaces class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for interfaces operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>traffic_top: executes traffic_top.py</p></li>
+<li><p>traffic_stats: executes traffic_stats.php</p></li>
+<li><p>traceroute: executes traceroute.py</p></li>
+<li><p>rtsold_resolvconf: executes rtsold_resolvconf.sh</p></li>
+<li><p>reconfigure_vlans: executes reconfigure_vlans.php</p></li>
+<li><p>reconfigure_vips: executes reconfigure_vips.php</p></li>
+<li><p>reconfigure_neighbors: executes reconfigure_neighbors.php</p></li>
+<li><p>reconfigure_laggs: executes reconfigure_laggs.php</p></li>
+<li><p>ppp-uptime: executes ppp-uptime.sh</p></li>
+<li><p>ppp-rename: executes ppp-rename.sh</p></li>
+<li><p>ppp-linkup: executes ppp-linkup.sh</p></li>
+<li><p>ppp-linkdown: executes ppp-linkdown.sh</p></li>
+<li><p>portprobe: executes portprobe.py</p></li>
+<li><p>ping: executes ping.py</p></li>
+<li><p>mpd: executes mpd.script</p></li>
+<li><p>macinfo: executes macinfo.py</p></li>
+<li><p>list_sockstat: executes list_sockstat.py</p></li>
+<li><p>list_ndp: executes list_ndp.py</p></li>
+<li><p>list_macdb: executes list_macdb.py</p></li>
+<li><p>list_arp: executes list_arp.py</p></li>
+<li><p>ifctl: executes ifctl.sh</p></li>
+<li><p>dhclient: executes dhclient-script</p></li>
+<li><p>carp_set_status: executes carp_set_status.php</p></li>
+<li><p>carp_global_status: executes carp_global_status.php</p></li>
+<li><p>capture: executes capture.py</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.ipsec">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">ipsec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.ipsec" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-ipsec">
+<h2>class ipsec<a class="headerlink" href="#class-ipsec" title="Link to this heading"></a></h2>
+<p>Initializes the ipsec class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">ipsec</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters:</strong>
+base : Base_Class instance</p>
+<blockquote>
+<div><p>The parent object containing necessary SSH connection details.</p>
+</div></blockquote>
+<p><strong>Attributes:</strong>
+- commands : dict</p>
+<blockquote>
+<div><p>A dictionary of command configurations for ipsec operations,
+each containing command details such as the command string and flags.</p>
+<p>scripts:
+- lib: executes the ipsec library directory
+- updown_event: executes updown_event.py
+- spddelete: executes spddelete.py
+- saddelete: executes saddelete.py
+- list_status: executes list_status.py
+- list_spd: executes list_spd.py
+- list_sad: executes list_sad.py
+- list_leases: executes list_leases.py
+- get_legacy_vti: executes get_legacy_vti.php
+- disconnect: executes disconnect.py
+- connect: executes connect.py</p>
+</div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.netflow">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">netflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.netflow" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-netflow">
+<h2>class netflow<a class="headerlink" href="#class-netflow" title="Link to this heading"></a></h2>
+<p>Initialize the netflow class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">netflow</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong>
+base : Base_Class instance</p>
+<blockquote>
+<div><p>The parent object containing necessary SSH connection details.</p>
+</div></blockquote>
+<p><strong>Attributes:</strong>
+- commands : dict</p>
+<blockquote>
+<div><p>A dictionary of command configurations for netflow operations,
+each containing command details such as the command string and flags.</p>
+<p>scripts:
+- lib: executes the netflow library directory
+- get_top_usage: executes get_top_usage.py script
+- get_timeseries: executes get_timeseries.py script
+- flush_all: executes flush_all.sh script
+- flowd_aggregate_metadata: executes flowd_aggregate_metadata.py script
+- flowd_aggregate: executes flowd_aggregate.py script
+- export_details: executes export_details.py script
+- dump_log: executes dump_log.py script
+- flowctl_stats: executes flowctl_stats.py script</p>
+</div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.openssh">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">openssh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.openssh" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-openssh">
+<h2>class openssh<a class="headerlink" href="#class-openssh" title="Link to this heading"></a></h2>
+<p>Initializes the openssh class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">openssh</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for openssh operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>ssh_query: executes ssh_query.py</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.openvpn">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">openvpn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.openvpn" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-openvpn">
+<h2>class openvpn<a class="headerlink" href="#class-openvpn" title="Link to this heading"></a></h2>
+<p>Initializes the openvpn class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">openvpn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for openvpn operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>user_pass_verify: executes user_pass_verify.php</p></li>
+<li><p>tls_verify: executes tls_verify.php</p></li>
+<li><p>ovpn_status: executes ovpn_status.py</p></li>
+<li><p>ovpn_service_control: executes ovpn_service_control.php</p></li>
+<li><p>ovpn_event: executes ovpn_event.py</p></li>
+<li><p>kill_session: executes kill_session.py</p></li>
+<li><p>client_disconnect: executes client_disconnect.sh</p></li>
+<li><p>client_connect: executes client_connect.php</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.routes">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">routes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.routes" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-routes">
+<h2>class routes<a class="headerlink" href="#class-routes" title="Link to this heading"></a></h2>
+<p>Initializes the routes class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for routes operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>show_routes: executes show_routes.py</p></li>
+<li><p>gateways: executes gateways.php</p></li>
+<li><p>gateway_watcher: executes gateway_watcher.php</p></li>
+<li><p>gateway_status: executes gateway_status.php</p></li>
+<li><p>del_route: executes del_route.py</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.shaper">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">shaper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.shaper" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-shaper">
+<h2>class Shaper<a class="headerlink" href="#class-shaper" title="Link to this heading"></a></h2>
+<p>Initializes the shaper class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">suricata</span><span class="o">.</span><span class="n">shaper</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for shaper operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>update_tables: executes update_tables</p></li>
+<li><p>lib: executes lib/</p></li>
+<li><p>dummynet_stats: executes dummynet_stats.py*</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.shell">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.shell" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-shell">
+<h2>class Shell<a class="headerlink" href="#class-shell" title="Link to this heading"></a></h2>
+<p>Initializes the shell class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><p>base : Base_Class instance
+The parent object containing necessary SSH connection details and  configuration settings.</p>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for shell operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>setports: executes setports.php</p></li>
+<li><p>setaddr: executes setaddr.php</p></li>
+<li><p>restore: executes restore.sh</p></li>
+<li><p>reboot: executes reboot.php</p></li>
+<li><p>ping: executes ping.php</p></li>
+<li><p>password: executes password.php</p></li>
+<li><p>halt: executes halt.php</p></li>
+<li><p>firmware: executes firmware.sh</p></li>
+<li><p>defaults: executes defaults.php</p></li>
+<li><p>banner: executes banner.php</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.suricata">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">suricata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.suricata" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-suricata">
+<h2>class suricata<a class="headerlink" href="#class-suricata" title="Link to this heading"></a></h2>
+<p>Initializes the suricata class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">suricata</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><p>base : Base_Class instance
+The parent object containing necessary SSH connection details and  configuration settings.</p>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for suricata operations</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>setup: executes setup.sh*</p></li>
+<li><p>rule-updater: executes rule-updater.py*</p></li>
+<li><p>queryInstalledRules: executes queryInstalledRules.py*</p></li>
+<li><p>queryAlertLog: executes queryAlertLog.py*</p></li>
+<li><p>metadata: executes metadata/</p></li>
+<li><p>listRuleMetadata: executes listRuleMetadata.py*</p></li>
+<li><p>listInstallableRulesets: executes listInstallableRulesets.py*</p></li>
+<li><p>listAlertLogs: executes listAlertLogs.py*</p></li>
+<li><p>lib: executes lib/</p></li>
+<li><p>installRules: executes installRules.py*</p></li>
+<li><p>dropAlertLog: executes dropAlertLog.py*</p></li>
+<li><p>__init__: executes __init__.py*</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.syslog">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">syslog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.syslog" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-syslog">
+<h2>class syslog<a class="headerlink" href="#class-syslog" title="Link to this heading"></a></h2>
+<p>Initializes the syslog class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">syslog</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><p>base : Base_Class instance
+The parent object containing necessary SSH connection details and  configuration settings.</p>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for syslog operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>queryLog: executes queryLog.py</p></li>
+<li><p>logformats: executes logformats/</p></li>
+<li><p>log_archive: executes log_archive*</p></li>
+<li><p>lockout_handler: executes lockout_handler*</p></li>
+<li><p>list_applications: executes list_applications.php</p></li>
+<li><p>generate_certs: executes generate_certs*</p></li>
+<li><p>clearlog: executes clearlog.php</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.system">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.system" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
+<section id="class-system">
+<h2>class system<a class="headerlink" href="#class-system" title="Link to this heading"></a></h2>
+<p>Initializes the system class, inheriting from Exec_Class.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations for system operations,
+each containing command details such as the command string and flags.</p>
+<dl class="simple">
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>trigger_config_changed_events: executes trigger_config_changed_events.py</p></li>
+<li><p>temperature: executes temperature.sh</p></li>
+<li><p>sysctl: executes sysctl.py</p></li>
+<li><p>status: executes status.php</p></li>
+<li><p>ssl_ciphers: executes ssl_ciphers.py</p></li>
+<li><p>rrd_pfstate_info: executes rrd_pfstate_info.py</p></li>
+<li><p>rfc5246_cipher_suites: executes rfc5246_cipher_suites.csv</p></li>
+<li><p>remote_backup: executes remote_backup.php</p></li>
+<li><p>nameservers: executes nameservers.php</p></li>
+<li><p>certctl: executes certctl.py</p></li>
+<li><p>activity: executes activity.py</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="opnsense_helper.scripts.scripts.unbound">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">opnsense_helper.scripts.scripts.</span></span><span class="sig-name descname"><span class="pre">unbound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#opnsense_helper.scripts.scripts.unbound" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exec_Class</span></code></p>
-<p>Initializes the unbound class, inheriting from Exec_Class. If a base object 
-is provided, its attributes are copied to the current instance. This 
-initializer also sets up a dictionary of command configurations for various 
-unbound operations.</p>
-<p>Attributes:
-commands (dict): A dictionary where each key is a command name and the 
-value is another dictionary containing:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>command (str): The path to the script associated with the command.</p></li>
-<li><p>flags (list): A list of flags for the command. Currently, these</p></li>
+<section id="class-unbound">
+<h2>class unbound<a class="headerlink" href="#class-unbound" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Initializes the unbound class, inheriting from Exec_Class.</p></li>
 </ul>
-<p>are empty.</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Scripts</span><span class="o">.</span><span class="n">unbound</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">argument</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
 </div></blockquote>
+<p><strong>Parameters</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>base<span class="classifier">Base_Class instance</span></dt><dd><p>The parent object containing necessary SSH connection details</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>Attributes</strong></p>
+<ul>
+<li><dl>
+<dt>commands<span class="classifier">dict</span></dt><dd><p>A dictionary of command configurations with keys for configctl options,
+each containing command details such as the command string, arguments, 
+and flags.</p>
 <dl class="simple">
-<dt>Attributes:</dt><dd><ul class="simple">
-<li><p>wrapper: Executes ‘ubound/wrapper.py’.</p></li>
-<li><p>stats: Executes ‘ubound/stats.py’.</p></li>
-<li><p>start: Executes ‘ubound/start.sh’.</p></li>
-<li><p>restore_db: Executes ‘ubound/restore_db.py’.</p></li>
-<li><p>logger: Executes ‘ubound/logger.py’.</p></li>
-<li><p>check: Executes ‘ubound/check.sh’.</p></li>
-<li><p>cache: Executes ‘ubound/cache.sh’.</p></li>
-<li><p>blocklists: Executes ‘ubound/blocklists.py’.</p></li>
+<dt>scripts:</dt><dd><ul class="simple">
+<li><p>wrapper: executes wrapper.py</p></li>
+<li><p>stats: executes stats.py</p></li>
+<li><p>start: executes start.sh</p></li>
+<li><p>restore_db: executes restore_db.py</p></li>
+<li><p>logger: executes logger.py</p></li>
+<li><p>check: executes check.sh*</p></li>
+<li><p>cache: executes cache.sh*</p></li>
+<li><p>blocklists: executes blocklists.py</p></li>
 </ul>
 </dd>
 </dl>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 </dd></dl>
 
 </section>
@@ -360,7 +1668,7 @@ value is another dictionary containing:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="README.html" class="btn btn-neutral float-left" title="opnsense-helper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="README.html" class="btn btn-neutral float-left" title="about opnsense-helper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
